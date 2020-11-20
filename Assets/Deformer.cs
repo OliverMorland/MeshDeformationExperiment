@@ -13,20 +13,11 @@ public class Deformer : MonoBehaviour
 
         public PointUVW(GameObject [] _effectiveGridPoints, Vector3 _meshPointPos, float _gridUnitLength)
         {
-            /*
-            u = _u;
-            v = _v;
-            w = _w;
-            */
             effectiveGridPoints = _effectiveGridPoints;
-
-
             u = Mathf.Abs((_meshPointPos.x - _effectiveGridPoints[0].transform.position.x) / _gridUnitLength);
             v = Mathf.Abs((_meshPointPos.y - _effectiveGridPoints[0].transform.position.y) / _gridUnitLength);
             w = Mathf.Abs((_meshPointPos.z - _effectiveGridPoints[0].transform.position.z) / _gridUnitLength);
-
         }
-
 
 
         public Vector3 [] GetEffectiveGridPointPositions()
@@ -84,10 +75,6 @@ public class Deformer : MonoBehaviour
         for (int i = 0; i < m_MeshPoints.Length; i++)
         {
             GameObject[] effectiveGridPoints = FindSurroundingGridPoints(m_MeshPoints[i].transform.position);
-            float u = Mathf.Abs((m_MeshPoints[i].transform.position.x - effectiveGridPoints[0].transform.position.x) / length);
-            float v = Mathf.Abs((m_MeshPoints[i].transform.position.y - effectiveGridPoints[0].transform.position.y) / length);
-            float w = Mathf.Abs((m_MeshPoints[i].transform.position.z - effectiveGridPoints[0].transform.position.z) / length);
-            Debug.Log(string.Format("u: {0}, v: {1}, w: {2}", u, v, w));
             m_MeshPoints_uvw[i] = new PointUVW(effectiveGridPoints, m_MeshPoints[i].transform.position, length);
         }
 
