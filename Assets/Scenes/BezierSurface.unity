@@ -236,10 +236,12 @@ MonoBehaviour:
   m_ControlPointPrefab: {fileID: 8159979297879511725, guid: 94f76c82b408a4316ab0563678880618,
     type: 3}
   m_Point: {fileID: 1874746864}
-  n: 4
-  m: 3
+  n: 2
+  m: 2
   u: 0.5
   v: 0.5
+  find_C: 0
+  find_R: 0
 --- !u!4 &1238967174
 Transform:
   m_ObjectHideFlags: 0

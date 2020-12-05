@@ -28,8 +28,6 @@ public class BezierSurfaceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         Vector3 SUM_V = new Vector3(0, 0, 0);
         for (int c = 0; c <= n; c++)
         {
@@ -41,9 +39,8 @@ public class BezierSurfaceController : MonoBehaviour
                 SUM_U += Coefficient(m, r) * exp_u * FindPoint(c, r).transform.position;
             }
 
-
             float exp_v = Mathf.Pow(v, c) * Mathf.Pow(1 - v, n - c);
-            SUM_V += Coefficient(n, c) * exp_v * FindPoint(c, 0).transform.position;// * SUM_U;
+            SUM_V += Coefficient(n, c) * exp_v * SUM_U;
         }
         m_Point.transform.position = SUM_V;
 
@@ -64,6 +61,7 @@ public class BezierSurfaceController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            print(find_C + ((n + 1) * find_R));
             print(FindPoint(find_C, find_R).name);
         }
 
@@ -75,12 +73,12 @@ public class BezierSurfaceController : MonoBehaviour
     {
         P = new GameObject[(n + 1) * (m + 1)];
 
-        for (int c = 0; c <= n; c++)
+        for (int r = 0; r <= m; r++)
         {
-            for (int r = 0; r <= m; r++)
+            for (int c = 0; c <= n; c++)
             {
                 GameObject newControlPoint = Instantiate(m_ControlPointPrefab, transform);
-                P[c + (n * r)] = newControlPoint;
+                P[c + ((n + 1) * r)] = newControlPoint;
                 newControlPoint.name = string.Format("c: {0}, r: {1}", c, r);
                 newControlPoint.transform.position = new Vector3(c, r, 0);
             }
@@ -91,8 +89,7 @@ public class BezierSurfaceController : MonoBehaviour
 
     GameObject FindPoint(int c, int r)
     {
-        print(P[c + (n * r)].name);
-        return P[c + (n * r)];
+        return P[c + ((n +1) * r)];
     }
 
 
