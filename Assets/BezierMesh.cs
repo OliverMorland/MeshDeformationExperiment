@@ -22,6 +22,7 @@ public class BezierMesh : MonoBehaviour
     {
         m_mesh = new Mesh();
 
+        //Populating vertice array
         int arraySize = (int)(resolution * resolution);
         SurfacePoints = new GameObject[arraySize];
         m_vertices = new Vector3[arraySize];
@@ -29,11 +30,7 @@ public class BezierMesh : MonoBehaviour
         {
             for (v = 0; v <= 1; v += (1 / resolution))
             {
-                //GameObject newBezierSurfacePoint = Instantiate(m_BezierSurfacePointPrefab, transform);
-                //newBezierSurfacePoint.transform.position = GetBezierSurfacePosition(v, u, n, m);
                 int index = (int)((v + (resolution * u)) * resolution);
-                //SurfacePoints[index] = newBezierSurfacePoint;
-
                 m_vertices[index] = GetBezierSurfacePosition(v, u, n, m);
             }
         }
@@ -82,29 +79,57 @@ public class BezierMesh : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+
         //Update Bezier surface points
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.U))
         {
             Debug.Log("Updating..");
 
+            //Populating vertice array
+            int arraySize = (int)(resolution * resolution);
+            SurfacePoints = new GameObject[arraySize];
+            m_vertices = new Vector3[arraySize];
             for (u = 0; u <= 1; u += (1 / resolution))
             {
                 for (v = 0; v <= 1; v += (1 / resolution))
                 {
                     int index = (int)((v + (resolution * u)) * resolution);
-                    SurfacePoints[index].transform.position = GetBezierSurfacePosition(v, u, n, m);
-
-                    //Instead of surface points we must update the vertices
                     m_vertices[index] = GetBezierSurfacePosition(v, u, n, m);
                 }
             }
 
             //Add vertices to mesh
+            for (int i = 0; i < resolution * resolution; i++)
+            {
+                Debug.Log(m_vertices[i]);
+            }
             m_mesh.vertices = m_vertices;
 
             //Adding triangles
-            m_mesh.triangles = CreateTriangles(n, m);
+            int[] trianglePoints = new int[540];
+
+            int counter = 0;
+            int res = (int)resolution;
+            for (int r = 0; r < res - 1; r++)
+            {
+                for (int c = 0; c < res - 1; c++)
+                {
+                    int P0 = c + ((res) * r);
+                    int P1 = (c + 1) + ((res) * r);
+                    int P2 = c + ((res) * (r + 1));
+                    int P3 = (c + 1) + ((res) * (r + 1));
+
+                    trianglePoints[(6 * counter) + 0] = P1;
+                    trianglePoints[(6 * counter) + 1] = P0;
+                    trianglePoints[(6 * counter) + 2] = P2;
+                    trianglePoints[(6 * counter) + 3] = P2;
+                    trianglePoints[(6 * counter) + 4] = P3;
+                    trianglePoints[(6 * counter) + 5] = P1;
+
+                    counter++;
+                }
+            }
+            m_mesh.triangles = trianglePoints;
 
             //Add normals to mesh
             m_mesh.RecalculateNormals();
@@ -114,8 +139,9 @@ public class BezierMesh : MonoBehaviour
             m_meshFilter.mesh = m_mesh;
 
         }
-        */
+
     }
+
 
 
     GameObject FindPoint(int c, int r)
@@ -180,65 +206,6 @@ public class BezierMesh : MonoBehaviour
     }
 
 
-    void UpdateMesh()
-    {
-        //Add vertices to mesh
-        m_mesh.vertices = CreateVertices(n, m);
 
-        //Adding triangles
-        m_mesh.triangles = CreateTriangles(n, m);
-
-        //Add normals to mesh
-        m_mesh.RecalculateNormals();
-
-        //Add mesh to mesh filter
-        m_meshFilter = GetComponent<MeshFilter>();
-        m_meshFilter.mesh = m_mesh;
-    }
-
-
-    Vector3[] CreateVertices(int _n, int _m)
-    {
-        Vector3[] vertices = new Vector3[(_n + 1) * (_m + 1)];
-
-        for (int r = 0; r <= _m; r++)
-        {
-            for (int c = 0; c <= _n; c++)
-            {
-                vertices[c + ((_n + 1) * r)] = new Vector3(c, r, 0);
-            }
-        }
-
-        return vertices;
-    }
-
-
-
-    int[] CreateTriangles(int _n, int _m)
-    {
-        int[] trianglePoints = new int[6 * _n * _m];
-
-        int counter = 0;
-        for (int r = 0; r < _m; r++)
-        {
-            for (int c = 0; c < _n; c++)
-            {
-                int P0 = c + ((_n + 1) * r);
-                int P1 = (c + 1) + ((_n + 1) * r);
-                int P2 = c + ((_n + 1) * (r + 1));
-                int P3 = (c + 1) + ((_n + 1) * (r + 1));
-
-                trianglePoints[(6 * counter) + 0] = P1;
-                trianglePoints[(6 * counter) + 1] = P0;
-                trianglePoints[(6 * counter) + 2] = P2;
-                trianglePoints[(6 * counter) + 3] = P2;
-                trianglePoints[(6 * counter) + 4] = P3;
-                trianglePoints[(6 * counter) + 5] = P1;
-
-                counter++;
-            }
-        }
-
-        return trianglePoints;
-    }
+   
 }

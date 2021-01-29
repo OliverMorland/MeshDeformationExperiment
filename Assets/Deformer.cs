@@ -33,13 +33,13 @@ public class Deformer : MonoBehaviour
     }
 
     //Grid dimensions
-    public int width = 3;
-    public int height = 3;
-    public int depth = 3;
+    int width = 3;
+    int height = 3;
+    int depth = 3;
 
     //Grid
     public GameObject m_GridPointPrefab;
-    GameObject[] m_GridPoints;
+    public GameObject[] m_GridPoints;
 
     //Mesh Point
     public GameObject[] m_MeshPoints;
@@ -49,6 +49,8 @@ public class Deformer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        /*
         //Initialise Array
         m_GridPoints = new GameObject[width * height * depth];
 
@@ -67,6 +69,7 @@ public class Deformer : MonoBehaviour
                 }
             }
         }
+        */
 
 
         //Determine mesh points uvw values
