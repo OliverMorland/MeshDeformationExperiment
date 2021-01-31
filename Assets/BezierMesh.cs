@@ -16,6 +16,7 @@ public class BezierMesh : MonoBehaviour
     MeshFilter m_meshFilter;
     Mesh m_mesh;
     Vector3[] m_vertices;
+    Vector2[] m_uvCoords;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +27,14 @@ public class BezierMesh : MonoBehaviour
         int arraySize = (int)(resolution * resolution);
         SurfacePoints = new GameObject[arraySize];
         m_vertices = new Vector3[arraySize];
+        m_uvCoords = new Vector2[arraySize];
         for (u = 0; u <= 1; u += (1 / resolution))
         {
             for (v = 0; v <= 1; v += (1 / resolution))
             {
                 int index = (int)((v + (resolution * u)) * resolution);
                 m_vertices[index] = GetBezierSurfacePosition(v, u, n, m);
+                m_uvCoords[index] = new Vector2(u, v);
             }
         }
 
@@ -41,6 +44,9 @@ public class BezierMesh : MonoBehaviour
             Debug.Log(m_vertices[i]);
         }
         m_mesh.vertices = m_vertices;
+
+        //Add UV array to mesh
+        m_mesh.uv = m_uvCoords;
 
         //Adding triangles
         int[] trianglePoints = new int[540];
