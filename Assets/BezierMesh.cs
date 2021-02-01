@@ -66,21 +66,22 @@ public class BezierMesh : MonoBehaviour
                 int P2 = c + ((res) * (r + 1));
                 int P3 = (c + 1) + ((res) * (r + 1));
 
-                trianglePoints[(6 * counter) + 0] = P1;
-                trianglePoints[(6 * counter) + 1] = P0;
-                trianglePoints[(6 * counter) + 2] = P2;
-                trianglePoints[(6 * counter) + 3] = P2;
-                trianglePoints[(6 * counter) + 4] = P3;
-                trianglePoints[(6 * counter) + 5] = P1;
-
                 if (m_flipNormals == true)
                 {
-                    trianglePoints[(6 * counter) + 0] = P2;
+                    trianglePoints[(6 * counter) + 0] = P1;
+                    trianglePoints[(6 * counter) + 1] = P2;
+                    trianglePoints[(6 * counter) + 2] = P0;
+                    trianglePoints[(6 * counter) + 3] = P3;
+                    trianglePoints[(6 * counter) + 4] = P2;
+                    trianglePoints[(6 * counter) + 5] = P1;
+                }
+                else{
+                    trianglePoints[(6 * counter) + 0] = P1;
                     trianglePoints[(6 * counter) + 1] = P0;
-                    trianglePoints[(6 * counter) + 2] = P1;
-                    trianglePoints[(6 * counter) + 3] = P1;
+                    trianglePoints[(6 * counter) + 2] = P2;
+                    trianglePoints[(6 * counter) + 3] = P2;
                     trianglePoints[(6 * counter) + 4] = P3;
-                    trianglePoints[(6 * counter) + 5] = P2;
+                    trianglePoints[(6 * counter) + 5] = P1;
                 }
 
                 counter++;
@@ -163,6 +164,9 @@ public class BezierMesh : MonoBehaviour
         m_meshFilter = GetComponent<MeshFilter>();
         m_meshFilter.mesh = m_mesh;
     }
+
+
+
 
 
     GameObject FindPoint(int c, int r)
