@@ -18,6 +18,10 @@ public class BezierMesh : MonoBehaviour
     Vector3[] m_vertices;
     Vector2[] m_uvCoords;
 
+    public float m_speed = 10f;
+    public float m_maxAmplitude = 1f;
+    public bool m_flipNormals = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +73,16 @@ public class BezierMesh : MonoBehaviour
                 trianglePoints[(6 * counter) + 4] = P3;
                 trianglePoints[(6 * counter) + 5] = P1;
 
+                if (m_flipNormals == true)
+                {
+                    trianglePoints[(6 * counter) + 0] = P2;
+                    trianglePoints[(6 * counter) + 1] = P0;
+                    trianglePoints[(6 * counter) + 2] = P1;
+                    trianglePoints[(6 * counter) + 3] = P1;
+                    trianglePoints[(6 * counter) + 4] = P3;
+                    trianglePoints[(6 * counter) + 5] = P2;
+                }
+
                 counter++;
             }
         }
@@ -76,6 +90,18 @@ public class BezierMesh : MonoBehaviour
 
         //Add normals to mesh
         m_mesh.RecalculateNormals();
+        /*
+        if (m_flipNormals == true)
+        {
+            Vector3[] normals = m_mesh.normals;
+            for (int i = 0; i < normals.Length; i++)
+            {
+                normals[i] = normals[i] * -1f;
+                Debug.DrawLine(m_vertices[i], m_vertices[i] + normals[i]);
+            }
+            m_mesh.normals = normals;
+        }
+        */
 
         //Add mesh to mesh filter
         m_meshFilter = GetComponent<MeshFilter>();
@@ -90,64 +116,53 @@ public class BezierMesh : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.U))
         {
             Debug.Log("Updating..");
-
-            //Populating vertice array
-            int arraySize = (int)(resolution * resolution);
-            SurfacePoints = new GameObject[arraySize];
-            m_vertices = new Vector3[arraySize];
-            for (u = 0; u <= 1; u += (1 / resolution))
-            {
-                for (v = 0; v <= 1; v += (1 / resolution))
-                {
-                    int index = (int)((v + (resolution * u)) * resolution);
-                    m_vertices[index] = GetBezierSurfacePosition(v, u, n, m);
-                }
-            }
-
-            //Add vertices to mesh
-            for (int i = 0; i < resolution * resolution; i++)
-            {
-                Debug.Log(m_vertices[i]);
-            }
-            m_mesh.vertices = m_vertices;
-
-            //Adding triangles
-            int[] trianglePoints = new int[540];
-
-            int counter = 0;
-            int res = (int)resolution;
-            for (int r = 0; r < res - 1; r++)
-            {
-                for (int c = 0; c < res - 1; c++)
-                {
-                    int P0 = c + ((res) * r);
-                    int P1 = (c + 1) + ((res) * r);
-                    int P2 = c + ((res) * (r + 1));
-                    int P3 = (c + 1) + ((res) * (r + 1));
-
-                    trianglePoints[(6 * counter) + 0] = P1;
-                    trianglePoints[(6 * counter) + 1] = P0;
-                    trianglePoints[(6 * counter) + 2] = P2;
-                    trianglePoints[(6 * counter) + 3] = P2;
-                    trianglePoints[(6 * counter) + 4] = P3;
-                    trianglePoints[(6 * counter) + 5] = P1;
-
-                    counter++;
-                }
-            }
-            m_mesh.triangles = trianglePoints;
-
-            //Add normals to mesh
-            m_mesh.RecalculateNormals();
-
-            //Add mesh to mesh filter
-            m_meshFilter = GetComponent<MeshFilter>();
-            m_meshFilter.mesh = m_mesh;
-
+            UpdateVertexPositions();
         }
+
+        //Move control points
+        float t = Time.time;
+        float amplitude =  m_maxAmplitude * Mathf.Sin(m_speed * t) + 0.4f;
+
+        Vector3 displacement = new Vector3(0, amplitude, 0);
+
+        m_ControlPoints[3].transform.position = new Vector3(m_ControlPoints[3].transform.position.x, amplitude, m_ControlPoints[3].transform.position.z);
+        m_ControlPoints[4].transform.position = new Vector3(m_ControlPoints[4].transform.position.x, amplitude, m_ControlPoints[4].transform.position.z);
+        m_ControlPoints[5].transform.position = new Vector3(m_ControlPoints[5].transform.position.x, amplitude, m_ControlPoints[5].transform.position.z);
+
+        UpdateVertexPositions();
 
     }
 
+
+
+
+
+    void UpdateVertexPositions()
+    {
+        //Populating vertice array
+        int arraySize = (int)(resolution * resolution);
+        SurfacePoints = new GameObject[arraySize];
+        m_vertices = new Vector3[arraySize];
+        for (u = 0; u <= 1; u += (1 / resolution))
+        {
+            for (v = 0; v <= 1; v += (1 / resolution))
+            {
+                int index = (int)((v + (resolution * u)) * resolution);
+                m_vertices[index] = GetBezierSurfacePosition(v, u, n, m);
+            }
+        }
+
+        //Add vertices to mesh
+        for (int i = 0; i < resolution * resolution; i++)
+        {
+            Debug.Log(m_vertices[i]);
+        }
+        m_mesh.vertices = m_vertices;
+
+        //Add mesh to mesh filter
+        m_meshFilter = GetComponent<MeshFilter>();
+        m_meshFilter.mesh = m_mesh;
+    }
 
 
     GameObject FindPoint(int c, int r)
