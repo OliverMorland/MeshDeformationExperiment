@@ -120,6 +120,7 @@ public class BezierMesh : MonoBehaviour
             UpdateVertexPositions();
         }
 
+
         //Move control points
         float t = Time.time;
         float amplitude =  m_maxAmplitude * Mathf.Sin(m_speed * t) + 0.4f;

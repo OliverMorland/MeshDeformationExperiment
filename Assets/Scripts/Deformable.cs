@@ -103,22 +103,7 @@ public class Deformable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        /*
-        //Move control points
-        float t = Time.time;
-        float amplitude = m_maxAmplitude * Mathf.Sin(m_speed * t) + 0.4f;
-
-        Vector3 displacement = new Vector3(0, amplitude, 0);
-
-        m_ControlPointsTop[3].transform.position = new Vector3(m_ControlPointsTop[3].transform.position.x, amplitude, m_ControlPointsTop[3].transform.position.z);
-        m_ControlPointsTop[4].transform.position = new Vector3(m_ControlPointsTop[4].transform.position.x, amplitude, m_ControlPointsTop[4].transform.position.z);
-        m_ControlPointsTop[5].transform.position = new Vector3(m_ControlPointsTop[5].transform.position.x, amplitude, m_ControlPointsTop[5].transform.position.z);
-        */
-
-
         UpdateVertexPositions();
-
     }
 
 
@@ -227,8 +212,5 @@ public class Deformable : MonoBehaviour
 
         return SUM_V;
     }
-
-
-
 
 }
