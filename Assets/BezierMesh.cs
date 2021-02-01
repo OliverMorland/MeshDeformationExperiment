@@ -75,12 +75,12 @@ public class BezierMesh : MonoBehaviour
 
                 if (m_flipNormals == true)
                 {
-                    trianglePoints[(6 * counter) + 0] = P2;
-                    trianglePoints[(6 * counter) + 1] = P0;
-                    trianglePoints[(6 * counter) + 2] = P1;
-                    trianglePoints[(6 * counter) + 3] = P1;
-                    trianglePoints[(6 * counter) + 4] = P3;
-                    trianglePoints[(6 * counter) + 5] = P2;
+                    trianglePoints[(6 * counter) + 0] = P1;
+                    trianglePoints[(6 * counter) + 1] = P3;
+                    trianglePoints[(6 * counter) + 2] = P2;
+                    trianglePoints[(6 * counter) + 3] = P2;
+                    trianglePoints[(6 * counter) + 4] = P0;
+                    trianglePoints[(6 * counter) + 5] = P1;
                 }
 
                 counter++;
@@ -121,13 +121,13 @@ public class BezierMesh : MonoBehaviour
 
         //Move control points
         float t = Time.time;
-        float amplitude =  m_maxAmplitude * Mathf.Sin(m_speed * t) + 0.4f;
+        float amplitude =  m_maxAmplitude * Mathf.Sin(m_speed * t);
 
         Vector3 displacement = new Vector3(0, amplitude, 0);
 
-        m_ControlPoints[3].transform.position = new Vector3(m_ControlPoints[3].transform.position.x, amplitude, m_ControlPoints[3].transform.position.z);
-        m_ControlPoints[4].transform.position = new Vector3(m_ControlPoints[4].transform.position.x, amplitude, m_ControlPoints[4].transform.position.z);
-        m_ControlPoints[5].transform.position = new Vector3(m_ControlPoints[5].transform.position.x, amplitude, m_ControlPoints[5].transform.position.z);
+        m_ControlPoints[3].transform.position = new Vector3(amplitude, m_ControlPoints[3].transform.position.y, m_ControlPoints[3].transform.position.z);
+        m_ControlPoints[4].transform.position = new Vector3(amplitude, m_ControlPoints[4].transform.position.y, m_ControlPoints[4].transform.position.z);
+        m_ControlPoints[5].transform.position = new Vector3(amplitude, m_ControlPoints[5].transform.position.y, m_ControlPoints[5].transform.position.z);
 
         UpdateVertexPositions();
 
