@@ -7,6 +7,7 @@ public class Deformable : MonoBehaviour
     MeshFilter m_meshFilter;
     Vector3[] m_uvw;
     public ControlPointGrid m_ControlPointsGrid;
+    public GameObject[] m_BasisControlPoints;
     GameObject[] m_ControlPoints;
     GameObject[] SurfacePoints;
     int n = 3;
@@ -39,17 +40,17 @@ public class Deformable : MonoBehaviour
 
         m_uvw = new Vector3[vertices.Length];
 
-        Vector3 min = m_ControlPoints[0].transform.position;
-        Vector3 max = m_ControlPoints[0].transform.position;
-        for (int i = 0; i < m_ControlPoints.Length; i++)
+        Vector3 min = m_BasisControlPoints[0].transform.position;
+        Vector3 max = m_BasisControlPoints[0].transform.position;
+        for (int i = 0; i < m_BasisControlPoints.Length; i++)
         {
-            min.x = Mathf.Min(min.x, m_ControlPoints[i].transform.position.x);
-            min.y = Mathf.Min(min.y, m_ControlPoints[i].transform.position.y);
-            min.z = Mathf.Min(min.z, m_ControlPoints[i].transform.position.z);
+            min.x = Mathf.Min(min.x, m_BasisControlPoints[i].transform.position.x);
+            min.y = Mathf.Min(min.y, m_BasisControlPoints[i].transform.position.y);
+            min.z = Mathf.Min(min.z, m_BasisControlPoints[i].transform.position.z);
 
-            max.x = Mathf.Max(max.x, m_ControlPoints[i].transform.position.x);
-            max.y = Mathf.Max(max.y, m_ControlPoints[i].transform.position.y);
-            max.z = Mathf.Max(max.z, m_ControlPoints[i].transform.position.z);
+            max.x = Mathf.Max(max.x, m_BasisControlPoints[i].transform.position.x);
+            max.y = Mathf.Max(max.y, m_BasisControlPoints[i].transform.position.y);
+            max.z = Mathf.Max(max.z, m_BasisControlPoints[i].transform.position.z);
 
         }
 
@@ -116,25 +117,18 @@ public class Deformable : MonoBehaviour
             float v = m_uvw[i].x;
             float w = m_uvw[i].y;
 
+            GameObject[] controlPointsTopLayer;
+            GameObject[] controlPointsBottonLayer;
 
-            //Determine Control Points to use
-            int layerIndex = 0;
-            float layer_w = 0;
-            while (layer_w < w)
-            {
-                layer_w += (1f / (float)l);
-                layerIndex++;
-            }
-
-            GameObject[] controlPointsTopLayer = GetControlPointsOfLayer(layerIndex);
-            GameObject[] controlPointsBottonLayer = GetControlPointsOfLayer(layerIndex - 1);
+            GetControlPoints(w, out controlPointsBottonLayer, out controlPointsTopLayer);
 
             //Find positions over top and bottom layers of grid
             Vector3 topPos = GetBezierSurfacePosition(v, u, n, m, controlPointsTopLayer);
             Vector3 bottomPos = GetBezierSurfacePosition(v, u, n, m, controlPointsBottonLayer);
 
             //Interpolate position using w and top and bottom points
-            Vector3 pos = Vector3.Lerp(bottomPos, topPos, w);
+            float converted_w = w - (float)((int)w);
+            Vector3 pos = Vector3.Lerp(bottomPos, topPos, converted_w);
             m_vertices[i] = transform.InverseTransformPoint(pos);
 
 
@@ -152,12 +146,35 @@ public class Deformable : MonoBehaviour
     GameObject [] GetControlPointsOfLayer(int layerIndex)
     {
         GameObject[] layerControlPoints = new GameObject[(n + 1) * (m + 1)];
+        Debug.Log("Control Points in layer: " + layerControlPoints.Length);
         for (int i = 0; i < layerControlPoints.Length; i++)
         {
-            layerControlPoints[i] = m_ControlPoints[i + layerIndex * (n + 1) * (m + 1)];
+            int index = i + layerIndex * (n + 1) * (m + 1);
+            layerControlPoints[i] = m_ControlPoints[index];
         }
 
         return layerControlPoints;
+    }
+
+
+    void GetControlPoints(Vector3 uvw, out GameObject[] bottomLayer, out GameObject [] topLayer)
+    {
+        bottomLayer = new GameObject[(n + 1) * (m + 1)];
+        int layerIndex =  (int)uvw.y;
+        for (int i = 0; i < bottomLayer.Length; i++)
+        {
+            int index = i + layerIndex * (n + 1) * (m + 1);
+            bottomLayer[i] = m_ControlPoints[index];
+        }
+        topLayer = new GameObject[(n + 1) * (m + 1)];
+        layerIndex ++;
+        for (int i = 0; i < topLayer.Length; i++)
+        {
+            int index = i + layerIndex * (n + 1) * (m + 1);
+            topLayer[i] = m_ControlPoints[index];
+        }
+
+
     }
 
 
@@ -204,6 +221,9 @@ public class Deformable : MonoBehaviour
 
     Vector3 GetBezierSurfacePosition(float v, float u, int n, int m, GameObject[] controlPoints)
     {
+        u = u - (float)((int)u);
+        v = v - (float)((int)v);
+
         Vector3 SUM_V = new Vector3(0, 0, 0);
         for (int c = 0; c <= n; c++)
         {
