@@ -6,26 +6,33 @@ public class Deformable : MonoBehaviour
 {
     MeshFilter m_meshFilter;
     Vector3[] m_uvw;
-    public GameObject m_BezierSurfacePointPrefab;
-    public GameObject[] m_ControlPoints;
+    public ControlPointGrid m_ControlPointsGrid;
+    GameObject[] m_ControlPoints;
     GameObject[] SurfacePoints;
-    public int n = 3;
-    public int m = 3;
-    public int l = 1;
+    int n = 3;
+    int m = 3;
+    int l = 1;
     float resolution = 10f;
   
     Vector3[] m_vertices;
     Vector2[] m_uvCoords;
 
-    public float m_speed = 10f;
-    public float m_maxAmplitude = 1f;
-    public int m_layerIndex = 0;
-    public bool m_flipNormals = false;
+    int m_layerIndex = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //Populate control points
+        m_ControlPoints = new GameObject[m_ControlPointsGrid.transform.childCount];
+        for (int i = 0; i < m_ControlPoints.Length; i++)
+        {
+            m_ControlPoints[i] = m_ControlPointsGrid.transform.GetChild(i).gameObject;
+        }
+        n = m_ControlPointsGrid.N;
+        m = m_ControlPointsGrid.M;
+        l = m_ControlPointsGrid.L;
+
         m_meshFilter = GetComponent<MeshFilter>();
 
         Vector3[] vertices = m_meshFilter.mesh.vertices;
