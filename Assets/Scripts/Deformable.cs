@@ -91,6 +91,7 @@ public class Deformable : MonoBehaviour
 
 
             m_uvw[i] = uvw;
+            Debug.Log($"Vertice {i}:  u {uvw.x}, v {uvw.z}, w {uvw.y}");
         }
 
         m_meshFilter.mesh.RecalculateNormals();
@@ -120,7 +121,7 @@ public class Deformable : MonoBehaviour
             GameObject[] controlPointsTopLayer;
             GameObject[] controlPointsBottonLayer;
 
-            GetControlPoints(w, out controlPointsBottonLayer, out controlPointsTopLayer);
+            GetControlPoints(m_uvw[i], out controlPointsBottonLayer, out controlPointsTopLayer);
 
             //Find positions over top and bottom layers of grid
             Vector3 topPos = GetBezierSurfacePosition(v, u, n, m, controlPointsTopLayer);
@@ -160,7 +161,7 @@ public class Deformable : MonoBehaviour
     void GetControlPoints(Vector3 uvw, out GameObject[] bottomLayer, out GameObject [] topLayer)
     {
         bottomLayer = new GameObject[(n + 1) * (m + 1)];
-        int layerIndex =  (int)uvw.y;
+        int layerIndex = (int)uvw.y;
         for (int i = 0; i < bottomLayer.Length; i++)
         {
             int index = i + layerIndex * (n + 1) * (m + 1);
