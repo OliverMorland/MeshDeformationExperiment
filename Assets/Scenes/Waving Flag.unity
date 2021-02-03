@@ -317,13 +317,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364839649}
-  m_LocalRotation: {x: 0.31604424, y: -0.39004475, z: 0.09716096, w: 0.85938406}
-  m_LocalPosition: {x: 4, y: 3.68, z: -1.22}
+  m_LocalRotation: {x: 0.31857464, y: 0.13468689, z: -0.08851414, w: 0.93409586}
+  m_LocalPosition: {x: -0.15, y: 3.68, z: -2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 38.243, y: -50.840004, z: -5.813}
+  m_LocalEulerAnglesHint: {x: 38.243, y: 14.393001, z: -5.813}
 --- !u!1 &476139182
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &746541103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746541102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.412, y: 0.166, z: 0.5}
+  m_LocalPosition: {x: 0.23, y: 0.211, z: 0.149}
   m_LocalScale: {x: 0.32843834, y: 0.32843834, z: 0.32843834}
   m_Children: []
   m_Father: {fileID: 0}
@@ -648,8 +648,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e719f441fd7784052bac76c19e83bd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPointsGrid: {fileID: 2647957159217325755}
-  m_BasisControlPoints: []
+  m_ControlPointsGrid: {fileID: 1526953822}
+  m_BasisControlPoints:
+  - {fileID: 1569377829}
+  - {fileID: 886564574}
 --- !u!1 &847479460
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +761,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &886564574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4692718239941584759, guid: e6451276583824dd98f6d6b6f34b005f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3666568820861585143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1236182464
 GameObject:
   m_ObjectHideFlags: 0

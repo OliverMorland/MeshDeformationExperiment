@@ -91,7 +91,6 @@ public class Deformable : MonoBehaviour
 
 
             m_uvw[i] = uvw;
-            Debug.Log($"Vertice {i}:  u {uvw.x}, v {uvw.z}, w {uvw.y}");
         }
 
         m_meshFilter.mesh.RecalculateNormals();
@@ -100,6 +99,14 @@ public class Deformable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Debug.Log("Gettting Points");
+            GetStackPoints();
+        }
+
+
         UpdateVertexPositions();
     }
 
@@ -118,14 +125,14 @@ public class Deformable : MonoBehaviour
             float v = m_uvw[i].x;
             float w = m_uvw[i].y;
 
-            GameObject[] controlPointsTopLayer;
-            GameObject[] controlPointsBottonLayer;
+            GameObject[] controlPointsTopStack;
+            GameObject[] controlPointsBottomStack;
 
-            GetControlPoints(m_uvw[i], out controlPointsBottonLayer, out controlPointsTopLayer);
+            GetControlPoints(m_uvw[i], out controlPointsBottomStack, out controlPointsTopStack);
 
             //Find positions over top and bottom layers of grid
-            Vector3 topPos = GetBezierSurfacePosition(v, u, n, m, controlPointsTopLayer);
-            Vector3 bottomPos = GetBezierSurfacePosition(v, u, n, m, controlPointsBottonLayer);
+            Vector3 topPos = GetBezierSurfacePosition(v, u, 2, 2, controlPointsTopStack);
+            Vector3 bottomPos = GetBezierSurfacePosition(v, u, 2, 2, controlPointsBottomStack);
 
             //Interpolate position using w and top and bottom points
             float converted_w = w - (float)((int)w);
@@ -143,6 +150,55 @@ public class Deformable : MonoBehaviour
         //m_meshFilter.mesh = m_mesh;
     }
 
+    void GetStackPoints()
+    {
+        //Threshold uvw values, e,g v = 1.2 so v_index = 1
+        int v_index = (int)m_uvw[2].x;
+        int w_index = (int)m_uvw[2].y;
+        int u_index = (int)m_uvw[2].z;
+
+        Debug.Log($"v: {v_index}, w: {w_index}, u: {u_index}");
+
+        //Finding bottom layer control points
+        GameObject[] bottomLayer = new GameObject[(n + 1) * (m + 1)];
+        for (int i = 0; i < bottomLayer.Length; i++)
+        {
+            int index = i + w_index * (n + 1) * (m + 1);
+            bottomLayer[i] = m_ControlPoints[index];
+        }
+
+        //Finding top layer control points
+        GameObject[] topLayer = new GameObject[(n + 1) * (m + 1)];
+        w_index++;
+        for (int i = 0; i < topLayer.Length; i++)
+        {
+            int index = i + w_index * (n + 1) * (m + 1);
+            topLayer[i] = m_ControlPoints[index];
+        }
+
+        //Finding stack Control Points
+        GameObject[] topStack = new GameObject[9];
+        GameObject[] bottomStack = new GameObject[9];
+        for (int c = (v_index * 2); c < (v_index * 2) + 3; c++)
+        {
+            for (int r = (u_index * 2); r < (u_index * 2) + 3; r++)
+            {
+                int stackIndex = (c - (v_index * 2)) + (3 * (r - u_index * 2));
+                topStack[stackIndex] = FindPoint(c, r, n, topLayer);
+                bottomStack[stackIndex] = FindPoint(c, r, n, bottomLayer);
+            }
+        }
+
+        //Resize Stack Contol points
+        for (int i = 0; i < 9; i++)
+        {
+            topStack[i].transform.localScale *= 2f;
+            bottomStack[i].transform.localScale *= 2f;
+        }
+
+
+    }
+
 
     GameObject [] GetControlPointsOfLayer(int layerIndex)
     {
@@ -158,28 +214,46 @@ public class Deformable : MonoBehaviour
     }
 
 
-    void GetControlPoints(Vector3 uvw, out GameObject[] bottomLayer, out GameObject [] topLayer)
+    void GetControlPoints(Vector3 uvw, out GameObject[] bottomStack, out GameObject [] topStack)
     {
-        bottomLayer = new GameObject[(n + 1) * (m + 1)];
-        int layerIndex = (int)uvw.y;
+        //Threshold uvw values, e,g v = 1.2 so v_index = 1
+        int v_index = (int)uvw.x;
+        int w_index = (int)uvw.y;
+        int u_index = (int)uvw.z;
+
+        //Finding bottom layer control points
+        GameObject[] bottomLayer = new GameObject[(n + 1) * (m + 1)];
         for (int i = 0; i < bottomLayer.Length; i++)
         {
-            int index = i + layerIndex * (n + 1) * (m + 1);
+            int index = i + w_index * (n + 1) * (m + 1);
             bottomLayer[i] = m_ControlPoints[index];
         }
-        topLayer = new GameObject[(n + 1) * (m + 1)];
-        layerIndex ++;
+
+        //Finding top layer control points
+        GameObject[] topLayer = new GameObject[(n + 1) * (m + 1)];
+        w_index ++;
         for (int i = 0; i < topLayer.Length; i++)
         {
-            int index = i + layerIndex * (n + 1) * (m + 1);
+            int index = i + w_index * (n + 1) * (m + 1);
             topLayer[i] = m_ControlPoints[index];
         }
 
-
+        //Finding stack Control Points
+        topStack = new GameObject[9];
+        bottomStack = new GameObject[9];
+        for (int c = (v_index * 2); c < (v_index * 2) + 3; c++)
+        {
+            for (int r = (u_index * 2); r < (u_index * 2) + 3; r++)
+            {
+                int stackIndex = (c - (v_index * 2)) + (3 * (r - u_index * 2));
+                topStack[stackIndex] = FindPoint(c, r, n, topLayer);
+                bottomStack[stackIndex] = FindPoint(c, r, n, bottomLayer);
+            }
+        }
     }
 
 
-    GameObject FindPoint(int c, int r, GameObject [] controlPoints)
+    GameObject FindPoint(int c, int r, int n, GameObject [] controlPoints)
     {
         return controlPoints[c + ((n + 1) * r)];
     }
@@ -232,7 +306,7 @@ public class Deformable : MonoBehaviour
             for (int r = 0; r <= m; r++)
             {
                 float exp_u = Mathf.Pow(u, r) * Mathf.Pow(1 - u, m - r);
-                SUM_U += Coefficient(m, r) * exp_u * FindPoint(c, r, controlPoints).transform.position;
+                SUM_U += Coefficient(m, r) * exp_u * FindPoint(c, r, n, controlPoints).transform.position;
             }
 
             float exp_v = Mathf.Pow(v, c) * Mathf.Pow(1 - v, n - c);
