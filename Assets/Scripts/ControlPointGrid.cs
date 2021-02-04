@@ -6,7 +6,9 @@ using System.IO;
 public class ControlPointGrid : MonoBehaviour
 {
     public string m_LoadFromPath;
-
+    public string m_SaveToPath;
+    public GameObject[] m_basisPoints;
+    Vector3[] basisPointPositions;
     public int N;
     public int M;
     public int L;
@@ -19,7 +21,18 @@ public class ControlPointGrid : MonoBehaviour
 
     void Start()
     {
+        //Determine Basis Point positions
+        basisPointPositions = new Vector3[m_basisPoints.Length];
+        for (int i = 0; i < basisPointPositions.Length; i++)
+        {
+            basisPointPositions[i] = m_basisPoints[i].transform.position;
+        }
 
+        //Load Grid Points
+        if (!string.IsNullOrEmpty(m_LoadFromPath))
+        {
+            LoadGrid(m_LoadFromPath);
+        }
     }
 
     // Update is called once per frame
@@ -27,23 +40,29 @@ public class ControlPointGrid : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            Debug.Log("'S' key pressed");
-            SaveGrid("Assets/GridData.txt");
+            if (!string.IsNullOrEmpty(m_SaveToPath))
+            {
+                Debug.Log("'S' key pressed");
+                SaveGrid(m_SaveToPath);
+            }
         }
+
 
         if (Input.GetKey(KeyCode.L))
         {
-            Debug.Log("'L' key pressed");
-            LoadGrid("Assets/GridData.txt");
+            if (!string.IsNullOrEmpty(m_LoadFromPath))
+            {
+                Debug.Log("'L' key pressed");
+                LoadGrid(m_LoadFromPath);
+            }
         }
     }
 
 
     public void SaveGrid(string filePath)
     {
-        //Find all point positions
+        //Find all control point positions
         Vector3[] controlPointsPositions;
-        Vector3[] basisPoints;
         controlPointsPositions = new Vector3[transform.childCount];
         for (int i = 0; i < controlPointsPositions.Length; i++)
         {
@@ -53,7 +72,7 @@ public class ControlPointGrid : MonoBehaviour
         //Create json text
         GridData gridData = new GridData();
         gridData.gridPointPositions = controlPointsPositions;
-        gridData.basisPointPositions = null;
+        gridData.basisPointPositions = basisPointPositions;
         string jsonString = JsonUtility.ToJson(gridData);
 
         File.WriteAllText(filePath, jsonString);
@@ -62,8 +81,15 @@ public class ControlPointGrid : MonoBehaviour
 
     public void LoadGrid(string filePath)
     {
+        //Load grid data
         string jsonString = File.ReadAllText(filePath);
         GridData gridData = JsonUtility.FromJson<GridData>(jsonString);
-        Debug.Log($"Coords {gridData.gridPointPositions[1].z}");
+
+        //Set control point positions
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).transform.position = gridData.gridPointPositions[i];
+        }
+
     }
 }

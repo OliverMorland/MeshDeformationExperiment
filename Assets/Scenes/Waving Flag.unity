@@ -1066,7 +1066,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3666568820861585143}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896520809}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64c0b3735a53f4d2b8d69bd645dab375, type: 3}
@@ -1296,25 +1296,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1896520809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3666568822019142059, guid: e6451276583824dd98f6d6b6f34b005f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3666568820861585143}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1896520811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896520809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544bf6e80747f4d4b9258e268cd5eb8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LoadFromPath: 
 --- !u!1 &1966267867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,6 +1690,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
+        type: 3}
+      propertyPath: m_basisPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
+        type: 3}
+      propertyPath: m_basisPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1569377829}
+    - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
+        type: 3}
+      propertyPath: m_basisPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1512091753}
+    - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
+        type: 3}
+      propertyPath: m_LoadFromPath
+      value: Assets/GridData.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
+        type: 3}
+      propertyPath: m_SaveToPath
+      value: Assets/GridData.txt
+      objectReference: {fileID: 0}
     - target: {fileID: 3666568822019142058, guid: e6451276583824dd98f6d6b6f34b005f,
         type: 3}
       propertyPath: m_LocalPosition.x
