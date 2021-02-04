@@ -7,7 +7,7 @@ public class Deformable : MonoBehaviour
     MeshFilter m_meshFilter;
     Vector3[] m_uvw;
     public ControlPointGrid m_ControlPointsGrid;
-    public GameObject[] m_BasisControlPoints;
+    //public GameObject[] m_BasisControlPoints;
     GameObject[] m_ControlPoints;
     GameObject[] SurfacePoints;
     int n = 3;
@@ -40,17 +40,18 @@ public class Deformable : MonoBehaviour
 
         m_uvw = new Vector3[vertices.Length];
 
-        Vector3 min = m_BasisControlPoints[0].transform.position;
-        Vector3 max = m_BasisControlPoints[0].transform.position;
-        for (int i = 0; i < m_BasisControlPoints.Length; i++)
+        GameObject[] basisControlPoints = m_ControlPointsGrid.m_basisPoints; 
+        Vector3 min = m_ControlPointsGrid.m_basisPoints[0].transform.position;
+        Vector3 max = m_ControlPointsGrid.m_basisPoints[0].transform.position;
+        for (int i = 0; i < basisControlPoints.Length; i++)
         {
-            min.x = Mathf.Min(min.x, m_BasisControlPoints[i].transform.position.x);
-            min.y = Mathf.Min(min.y, m_BasisControlPoints[i].transform.position.y);
-            min.z = Mathf.Min(min.z, m_BasisControlPoints[i].transform.position.z);
+            min.x = Mathf.Min(min.x, basisControlPoints[i].transform.position.x);
+            min.y = Mathf.Min(min.y, basisControlPoints[i].transform.position.y);
+            min.z = Mathf.Min(min.z, basisControlPoints[i].transform.position.z);
 
-            max.x = Mathf.Max(max.x, m_BasisControlPoints[i].transform.position.x);
-            max.y = Mathf.Max(max.y, m_BasisControlPoints[i].transform.position.y);
-            max.z = Mathf.Max(max.z, m_BasisControlPoints[i].transform.position.z);
+            max.x = Mathf.Max(max.x, basisControlPoints[i].transform.position.x);
+            max.y = Mathf.Max(max.y, basisControlPoints[i].transform.position.y);
+            max.z = Mathf.Max(max.z, basisControlPoints[i].transform.position.z);
 
         }
 
