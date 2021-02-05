@@ -8,8 +8,9 @@ public class ControlPointGrid : MonoBehaviour
     public string m_LoadFromPath;
     public string m_SaveToPath;
     public GameObject[] m_basisPoints;
-    Vector3[] basisPointPositions;
+    public Vector3[] m_basisPointPositions;
     Vector3[] m_controlPointStartPositions;
+
     GameObject[] m_controlPoints;
     public int N;
     public int M;
@@ -28,32 +29,35 @@ public class ControlPointGrid : MonoBehaviour
     class GridData
     {
         public Vector3[] gridPointPositions;
-        public Vector3[] basisPointPositions;
+        public Vector3[] m_basisPointPositions;
+        public Vector3 gridOriginPosition;
+        public Vector3 gridScale;
     }
 
     void Start()
     {
-        //Determine Basis Point positions
-        basisPointPositions = new Vector3[m_basisPoints.Length];
-        for (int i = 0; i < basisPointPositions.Length; i++)
-        {
-            basisPointPositions[i] = m_basisPoints[i].transform.position;
-        }
-
         //Get Control Points
         m_controlPoints = new GameObject[transform.childCount];
         m_controlPointStartPositions = new Vector3[transform.childCount];
         for (int i = 0; i < m_controlPoints.Length; i++)
         {
             m_controlPoints[i] = transform.GetChild(i).gameObject;
-            m_controlPointStartPositions[i] = transform.GetChild(i).transform.localPosition;
-            
+            m_controlPointStartPositions[i] = transform.GetChild(i).transform.position;
+
         }
 
         //Load Grid Points
-        if (!string.IsNullOrEmpty(m_LoadFromPath))
+        if (File.Exists(m_LoadFromPath))
         {
             LoadGrid(m_LoadFromPath);
+        }
+        else{
+            //Determine Basis Point positions
+            m_basisPointPositions = new Vector3[m_basisPoints.Length];
+            for (int i = 0; i < m_basisPointPositions.Length; i++)
+            {
+                m_basisPointPositions[i] = m_basisPoints[i].transform.position;
+            }
         }
     }
 
@@ -80,7 +84,12 @@ public class ControlPointGrid : MonoBehaviour
         }
 
 
-        displaceControlPoint();
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            Debug.Log("Displacing point");
+            displaceControlPoint();
+        }
+
 
     }
 
@@ -105,7 +114,9 @@ public class ControlPointGrid : MonoBehaviour
         //Create json text
         GridData gridData = new GridData();
         gridData.gridPointPositions = controlPointsPositions;
-        gridData.basisPointPositions = basisPointPositions;
+        gridData.m_basisPointPositions = m_basisPointPositions;
+        gridData.gridOriginPosition = transform.position;
+        gridData.gridScale = transform.localScale;
         string jsonString = JsonUtility.ToJson(gridData);
 
         File.WriteAllText(filePath, jsonString);
@@ -118,6 +129,13 @@ public class ControlPointGrid : MonoBehaviour
         string jsonString = File.ReadAllText(filePath);
         GridData gridData = JsonUtility.FromJson<GridData>(jsonString);
 
+        //Set grid position and scale
+        transform.position = gridData.gridOriginPosition;
+        transform.localScale = gridData.gridScale;
+
+        //Set Basis Positions
+        m_basisPointPositions = gridData.m_basisPointPositions;
+
         //Set control point positions
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -125,4 +143,7 @@ public class ControlPointGrid : MonoBehaviour
         }
 
     }
+
+    
 }
+
