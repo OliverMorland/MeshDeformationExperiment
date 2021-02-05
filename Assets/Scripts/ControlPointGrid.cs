@@ -9,9 +9,21 @@ public class ControlPointGrid : MonoBehaviour
     public string m_SaveToPath;
     public GameObject[] m_basisPoints;
     Vector3[] basisPointPositions;
+    Vector3[] m_controlPointStartPositions;
+    GameObject[] m_controlPoints;
     public int N;
     public int M;
     public int L;
+
+    [Header("Grid Controls")]
+    public int col;
+    public int row;
+    public int ele;
+
+    [Range(-0.5f, 0.5f)] public float x_displ = 0;
+    [Range(-0.5f, 0.5f)] public float y_displ = 0;
+    [Range(-0.5f, 0.5f)] public float z_displ = 0;
+
 
     class GridData
     {
@@ -26,6 +38,16 @@ public class ControlPointGrid : MonoBehaviour
         for (int i = 0; i < basisPointPositions.Length; i++)
         {
             basisPointPositions[i] = m_basisPoints[i].transform.position;
+        }
+
+        //Get Control Points
+        m_controlPoints = new GameObject[transform.childCount];
+        m_controlPointStartPositions = new Vector3[transform.childCount];
+        for (int i = 0; i < m_controlPoints.Length; i++)
+        {
+            m_controlPoints[i] = transform.GetChild(i).gameObject;
+            m_controlPointStartPositions[i] = transform.GetChild(i).transform.localPosition;
+            
         }
 
         //Load Grid Points
@@ -56,6 +78,17 @@ public class ControlPointGrid : MonoBehaviour
                 LoadGrid(m_LoadFromPath);
             }
         }
+
+
+        displaceControlPoint();
+
+    }
+
+
+    void displaceControlPoint()
+    {
+        int index = ((N+1) * (M+1) * ele) + ((N+1) * row) + col;
+        m_controlPoints[index].transform.localPosition = m_controlPointStartPositions[index] + new Vector3(x_displ, y_displ, z_displ);
     }
 
 
