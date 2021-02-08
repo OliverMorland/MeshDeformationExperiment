@@ -8,7 +8,6 @@ public class Deformable : MonoBehaviour
     MeshFilter m_meshFilter;
     Vector3[] m_uvw;
     public ControlPointGrid m_ControlPointsGrid;
-    public string m_meshFileName = "exampleMesh";
 
     GameObject[] m_ControlPoints;
     GameObject[] SurfacePoints;
@@ -102,15 +101,6 @@ public class Deformable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log("Saving FBX");
-            AssetDatabase.CreateAsset(m_meshFilter.mesh, $"Assets/DeformedMeshes/{m_meshFileName}.asset");
-            AssetDatabase.SaveAssets();
-        }
-
-
         UpdateVertexPositions();
     }
 
