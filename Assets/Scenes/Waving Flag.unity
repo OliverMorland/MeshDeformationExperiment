@@ -405,7 +405,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408007967}
-  m_Mesh: {fileID: 4300000, guid: 881ed576b5e6545cf90dd5325053e321, type: 2}
+  m_Mesh: {fileID: 7713707774505681637, guid: 77c2a1b3a549243bf990b58f61b9d25b, type: 3}
 --- !u!4 &408007972
 Transform:
   m_ObjectHideFlags: 0
@@ -730,7 +730,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710184431}
-  m_Mesh: {fileID: 4300000, guid: d5b75783ea24a494eb5a51b1b1066e05, type: 2}
+  m_Mesh: {fileID: -8032224494671191629, guid: ac19cd51f97b143bea5345b70beac9eb, type: 3}
 --- !u!4 &710184436
 Transform:
   m_ObjectHideFlags: 0
@@ -1256,7 +1256,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366424825}
-  m_Mesh: {fileID: 4300000, guid: 3fe4850f1a8144833969759d1224fd19, type: 2}
+  m_Mesh: {fileID: -2232335706408701288, guid: ac19cd51f97b143bea5345b70beac9eb, type: 3}
 --- !u!4 &1366424830
 Transform:
   m_ObjectHideFlags: 0
@@ -2022,7 +2022,7 @@ PrefabInstance:
     - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
         type: 3}
       propertyPath: m_LoadFromPath
-      value: Assets/TargetGridData/EuroManToAsiaFemale3.txt
+      value: Assets/TargetGridData/Dunce.txt
       objectReference: {fileID: 0}
     - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
         type: 3}

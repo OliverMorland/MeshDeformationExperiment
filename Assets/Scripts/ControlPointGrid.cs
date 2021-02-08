@@ -1,29 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.IO;
 
 public class ControlPointGrid : MonoBehaviour
 {
+
+    [Header("Grid Configuration")]
+    [Space(20)]
     public string m_LoadFromPath;
-    public string m_SaveToPath;
     public GameObject[] m_basisPoints;
     public Vector3[] m_basisPointPositions;
-    Vector3[] m_controlPointStartPositions;
-
-    GameObject[] m_controlPoints;
     public int N;
     public int M;
     public int L;
 
-    [Header("Grid Controls")]
-    public int col;
-    public int row;
-    public int ele;
 
-    [Range(-0.5f, 0.5f)] public float x_displ = 0;
-    [Range(-0.5f, 0.5f)] public float y_displ = 0;
-    [Range(-0.5f, 0.5f)] public float z_displ = 0;
+    [Header("Selecting Grid Points")]
+    [Space(20)]
+    [Range(0, 4)] public int m_column = 0;
+    [Range(0, 4)] public int m_row = 0;
+    [Range(0, 4)] public int m_storey = 0;
+
+
+    Vector3[] m_controlPointStartPositions;
+    GameObject[] m_controlPoints;
 
 
     class GridData
@@ -33,6 +35,7 @@ public class ControlPointGrid : MonoBehaviour
         public Vector3 gridOriginPosition;
         public Vector3 gridScale;
     }
+
 
     void Start()
     {
@@ -64,40 +67,23 @@ public class ControlPointGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (!string.IsNullOrEmpty(m_SaveToPath))
-            {
-                Debug.Log("'S' key pressed");
-                SaveGrid(m_SaveToPath);
-            }
-        }
-
-
-        if (Input.GetKey(KeyCode.L))
-        {
-            if (!string.IsNullOrEmpty(m_LoadFromPath))
-            {
-                Debug.Log("'L' key pressed");
-                LoadGrid(m_LoadFromPath);
-            }
-        }
-
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            Debug.Log("Displacing point");
-            displaceControlPoint();
-        }
-
-
+        SelectControlPoint(m_column, m_row, m_storey);
     }
 
 
-    void displaceControlPoint()
+
+    void SelectControlPoint(int column, int row, int storey)
     {
-        int index = ((N+1) * (M+1) * ele) + ((N+1) * row) + col;
-        m_controlPoints[index].transform.localPosition = m_controlPointStartPositions[index] + new Vector3(x_displ, y_displ, z_displ);
+        int index = ((N+1) * (M+1) * storey) + ((N+1) * row) + column;
+
+        for (int i = 0; i < m_controlPoints.Length; i++)
+        {
+            m_controlPoints[i].transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+            m_controlPoints[i].GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        m_controlPoints[index].transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        m_controlPoints[index].GetComponent<Renderer>().material.color = Color.yellow;
     }
 
 
