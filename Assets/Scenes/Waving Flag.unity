@@ -270,6 +270,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: -3760585382829522455, guid: 864dc07aca4d2476cbee469e6efe3c83,
+    type: 3}
 --- !u!135 &408007969
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -329,7 +331,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408007967}
-  m_Mesh: {fileID: 3564427849321805674, guid: 864dc07aca4d2476cbee469e6efe3c83, type: 3}
+  m_Mesh: {fileID: 1007614363569886252, guid: 864dc07aca4d2476cbee469e6efe3c83, type: 3}
 --- !u!4 &408007972
 Transform:
   m_ObjectHideFlags: 0
@@ -377,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &514655184
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -484,6 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &529086263
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -577,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &710184432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &710184433
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -698,6 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 0}
+  m_newMesh: {fileID: 0}
 --- !u!64 &847479462
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -792,7 +798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1028564723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,6 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &1028564724
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -913,6 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &1093336550
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1020,6 +1028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &1095472157
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1205,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1366424826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &1366424827
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1428,7 +1438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1602405406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1442,6 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
+  m_newMesh: {fileID: 0}
 --- !u!135 &1602405407
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1913,7 +1924,7 @@ PrefabInstance:
     - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
         type: 3}
       propertyPath: m_LoadFromPath
-      value: Assets/TargetGridData/EuroMaleToAfricaMale.txt
+      value: Assets/TargetGridData/EuroMaleToEuroFemale.txt
       objectReference: {fileID: 0}
     - target: {fileID: 3666568822019142057, guid: e6451276583824dd98f6d6b6f34b005f,
         type: 3}

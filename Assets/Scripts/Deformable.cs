@@ -8,6 +8,7 @@ public class Deformable : MonoBehaviour
     MeshFilter m_meshFilter;
     Vector3[] m_uvw;
     public ControlPointGrid m_ControlPointsGrid;
+    public Mesh m_newMesh;
 
     GameObject[] m_ControlPoints;
     GameObject[] SurfacePoints;
@@ -36,18 +37,6 @@ public class Deformable : MonoBehaviour
         l = m_ControlPointsGrid.L;
 
 
-        CalculateBasisPoints();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateVertexPositions();
-    }
-
-    public void CalculateBasisPoints()
-    {
         m_meshFilter = GetComponent<MeshFilter>();
 
         Vector3[] vertices = m_meshFilter.mesh.vertices;
@@ -109,8 +98,95 @@ public class Deformable : MonoBehaviour
         }
 
         m_meshFilter.mesh.RecalculateNormals();
+
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            Debug.Log("R key pressed");
+            //ResetMesh();
+        }
+
+        UpdateVertexPositions();
+    }
+
+    public void ResetUVWs()
+    {
+        //Load ReferenceGrid
+        //m_ControlPointsGrid.LoadGrid("Assets/TargetGridData/ReferenceGrid.txt");
+
+        //Set new mesh
+        //m_meshFilter.mesh = m_newMesh;
+
+        //Reset uvw values
+        m_meshFilter = GetComponent<MeshFilter>();
+
+        Vector3[] vertices = m_meshFilter.mesh.vertices;
+
+        m_uvw = new Vector3[vertices.Length];
+
+        GameObject[] basisPoints = m_ControlPointsGrid.m_basisPoints;
+        Vector3 min = basisPoints[0].transform.position;
+        Vector3 max = basisPoints[0].transform.position;
+        for (int i = 0; i < basisPoints.Length; i++)
+        {
+            min.x = Mathf.Min(min.x, basisPoints[i].transform.position.x);
+            min.y = Mathf.Min(min.y, basisPoints[i].transform.position.y);
+            min.z = Mathf.Min(min.z, basisPoints[i].transform.position.z);
+
+            max.x = Mathf.Max(max.x, basisPoints[i].transform.position.x);
+            max.y = Mathf.Max(max.y, basisPoints[i].transform.position.y);
+            max.z = Mathf.Max(max.z, basisPoints[i].transform.position.z);
+
+        }
+
+        Vector3 delta = max - min;
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 v = transform.TransformPoint(vertices[i]);
+
+            //Convert based on reference frame
+            Vector3 uvw = Vector3.zero;
+            if (Mathf.Approximately(delta.x, 0f))
+            {
+                uvw.x = 0f;
+            }
+            else
+            {
+                uvw.x = (v.x - min.x) / delta.x;
+            }
+
+            if (Mathf.Approximately(delta.y, 0f))
+            {
+                uvw.y = 0f;
+            }
+            else
+            {
+                uvw.y = (v.y - min.y) / delta.y;
+            }
+
+            if (Mathf.Approximately(delta.z, 0f))
+            {
+                uvw.z = 0f;
+            }
+            else
+            {
+                uvw.z = (v.z - min.z) / delta.z;
+            }
+
+
+            m_uvw[i] = uvw;
+        }
+
+        //Load Grid
+        //m_ControlPointsGrid.LoadGrid(m_ControlPointsGrid.m_LoadFromPath);
+         
+    }
 
     void UpdateVertexPositions()
     {
@@ -118,6 +194,9 @@ public class Deformable : MonoBehaviour
         int arraySize = (int)(resolution * resolution);
         SurfacePoints = new GameObject[arraySize];
         m_vertices = m_meshFilter.mesh.vertices;
+
+        Debug.Log("vertice length: " + m_vertices.Length);
+        Debug.Log("uvw length: " + m_uvw.Length);
 
         for (int i = 0; i < m_uvw.Length; i++)
         {
@@ -137,8 +216,13 @@ public class Deformable : MonoBehaviour
             //Interpolate position using w and top and bottom points
             float converted_w = w - (float)((int)w);
             Vector3 pos = Vector3.Lerp(bottomPos, topPos, converted_w);
-            m_vertices[i] = transform.InverseTransformPoint(pos);
 
+            if (i > m_vertices.Length)
+            {
+                Debug.Log("uvw count > vertices count");
+            }
+
+            m_vertices[i] = transform.InverseTransformPoint(pos);
 
         }
 
