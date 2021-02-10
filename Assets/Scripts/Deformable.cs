@@ -35,6 +35,19 @@ public class Deformable : MonoBehaviour
         m = m_ControlPointsGrid.M;
         l = m_ControlPointsGrid.L;
 
+
+        CalculateBasisPoints();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateVertexPositions();
+    }
+
+    public void CalculateBasisPoints()
+    {
         m_meshFilter = GetComponent<MeshFilter>();
 
         Vector3[] vertices = m_meshFilter.mesh.vertices;
@@ -97,13 +110,6 @@ public class Deformable : MonoBehaviour
 
         m_meshFilter.mesh.RecalculateNormals();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateVertexPositions();
-    }
-
 
 
     void UpdateVertexPositions()
