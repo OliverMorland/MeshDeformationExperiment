@@ -17,13 +17,6 @@ public class ControlPointGrid : MonoBehaviour
     public int L;
 
 
-    [Header("Selecting Grid Points")]
-    [Space(20)]
-    [Range(0, 4)] public int m_column = 0;
-    [Range(0, 4)] public int m_row = 0;
-    [Range(0, 4)] public int m_storey = 0;
-
-
     Vector3[] m_controlPointStartPositions;
     GameObject[] m_controlPoints;
 
@@ -64,26 +57,11 @@ public class ControlPointGrid : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        SelectControlPoint(m_column, m_row, m_storey);
-    }
 
-
-
-    void SelectControlPoint(int column, int row, int storey)
+    public GameObject FindControlPoint(int column, int row, int storey)
     {
         int index = ((N+1) * (M+1) * storey) + ((N+1) * row) + column;
-
-        for (int i = 0; i < m_controlPoints.Length; i++)
-        {
-            m_controlPoints[i].transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
-            m_controlPoints[i].GetComponent<Renderer>().material.color = Color.red;
-        }
-
-        m_controlPoints[index].transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        m_controlPoints[index].GetComponent<Renderer>().material.color = Color.yellow;
+        return m_controlPoints[index];
     }
 
 
