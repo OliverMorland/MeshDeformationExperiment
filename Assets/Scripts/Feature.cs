@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Feature : MonoBehaviour
 {
+
     [Header("Options")]
     public List<Mesh> m_MeshOptions;
     public List<Color> m_ColorOptions;
+
+    [Header("Icons")]
+    [Space(20)]
+    public Sprite m_FeatureIcon;
+    public List<Sprite> m_MeshOptionIcons;
 
     static string m_referenceGridDataPath = "Assets/TargetGridData/ReferenceGrid.txt";
 

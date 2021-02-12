@@ -467,12 +467,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348043705}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e719f441fd7784052bac76c19e83bd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPointsGrid: {fileID: 0}
+  m_ControlPointsGrid: {fileID: 2125426806}
 --- !u!135 &348043708
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -761,6 +761,12 @@ MonoBehaviour:
   - {r: 0.8867924, g: 0.77119386, b: 0.6483624, a: 1}
   - {r: 0.6981132, g: 0.5378389, b: 0.40503737, a: 1}
   - {r: 0.24528301, g: 0.1405691, b: 0.019668924, a: 1}
+  m_FeatureIcon: {fileID: 0}
+  m_MeshOptionIcons:
+  - {fileID: 21300000, guid: 6b0ea9188cc274beba91f0fbbefc55e2, type: 3}
+  - {fileID: 21300000, guid: 7a7f031fa036a4e938c7314fd47a57c9, type: 3}
+  - {fileID: 21300000, guid: 3211869b3d7ab480c90314661a02bd53, type: 3}
+  - {fileID: 21300000, guid: 79a6c3caddf9f41d8b4bfe0d3353d803, type: 3}
 --- !u!224 &778011887 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2289185694125387766, guid: b0551d8f78edd424a81c2bafb3f1e666,
@@ -896,6 +902,10 @@ MonoBehaviour:
   - {r: 0, g: 0.43080854, b: 1, a: 1}
   - {r: 0, g: 0.5943396, b: 0.07933958, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  m_FeatureIcon: {fileID: 0}
+  m_MeshOptionIcons:
+  - {fileID: 21300000, guid: 89f77b7f442f0463f9f135f4fe956c05, type: 3}
+  - {fileID: 21300000, guid: 613d9a9cf3438486cb8a41ccbe2c8b5a, type: 3}
 --- !u!1 &815012697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1107,11 @@ MonoBehaviour:
   - {r: 0.9056604, g: 0.65569246, b: 0.36311856, a: 1}
   - {r: 0.41509432, g: 0.27945128, b: 0.05286579, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  m_FeatureIcon: {fileID: 0}
+  m_MeshOptionIcons:
+  - {fileID: 21300000, guid: c152beeb6a2a84a519414a6bf482c3aa, type: 3}
+  - {fileID: 21300000, guid: 6e36ac96bb10a47ce8d8dde2861216c9, type: 3}
+  - {fileID: 21300000, guid: 9ebaea6f2ee4c4a9992ecaadc82f4a6b, type: 3}
 --- !u!1 &1076398642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,7 +1433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.80784315}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

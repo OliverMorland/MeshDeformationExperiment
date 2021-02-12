@@ -5,22 +5,19 @@ using UnityEditor;
 
 public class Deformable : MonoBehaviour
 {
-    MeshFilter m_meshFilter;
-    Vector3[] m_uvw;
+    [Tooltip("Drag Control Point grid here")]
     public ControlPointGrid m_ControlPointsGrid;
-    public Mesh m_newMesh;
 
+    //Member Variables
     GameObject[] m_ControlPoints;
-    GameObject[] SurfacePoints;
+    MeshFilter m_meshFilter;
+    Vector3[] m_vertices;
+    Vector3[] m_uvw;
+    
     int n = 3;
     int m = 3;
     int l = 1;
     float resolution = 10f;
-  
-    Vector3[] m_vertices;
-    Vector2[] m_uvCoords;
-
-    int m_layerIndex = 0;
 
 
     // Start is called before the first frame update
@@ -32,103 +29,28 @@ public class Deformable : MonoBehaviour
         {
             m_ControlPoints[i] = m_ControlPointsGrid.transform.GetChild(i).gameObject;
         }
+
+        //Setting grid width, height and depth
         n = m_ControlPointsGrid.N;
         m = m_ControlPointsGrid.M;
         l = m_ControlPointsGrid.L;
 
-
-        m_meshFilter = GetComponent<MeshFilter>();
-
-        Vector3[] vertices = m_meshFilter.mesh.vertices;
-
-        m_uvw = new Vector3[vertices.Length];
-
-        GameObject[] basisPoints = m_ControlPointsGrid.m_basisPoints;
-        Vector3 min = basisPoints[0].transform.position;
-        Vector3 max = basisPoints[0].transform.position;
-        for (int i = 0; i < basisPoints.Length; i++)
-        {
-            min.x = Mathf.Min(min.x, basisPoints[i].transform.position.x);
-            min.y = Mathf.Min(min.y, basisPoints[i].transform.position.y);
-            min.z = Mathf.Min(min.z, basisPoints[i].transform.position.z);
-
-            max.x = Mathf.Max(max.x, basisPoints[i].transform.position.x);
-            max.y = Mathf.Max(max.y, basisPoints[i].transform.position.y);
-            max.z = Mathf.Max(max.z, basisPoints[i].transform.position.z);
-
-        }
-
-        Vector3 delta = max - min;
-
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Vector3 v = transform.TransformPoint(vertices[i]);
-
-            //Convert based on reference frame
-            Vector3 uvw = Vector3.zero;
-            if (Mathf.Approximately(delta.x, 0f))
-            {
-                uvw.x = 0f;
-            }
-            else
-            {
-                uvw.x = (v.x - min.x) / delta.x;
-            }
-
-            if (Mathf.Approximately(delta.y, 0f))
-            {
-                uvw.y = 0f;
-            }
-            else
-            {
-                uvw.y = (v.y - min.y) / delta.y;
-            }
-
-            if (Mathf.Approximately(delta.z, 0f))
-            {
-                uvw.z = 0f;
-            }
-            else
-            {
-                uvw.z = (v.z - min.z) / delta.z;
-            }
-
-
-            m_uvw[i] = uvw;
-        }
-
-        m_meshFilter.mesh.RecalculateNormals();
-
+      
+        //Setting uvw array
+        ResetUVWs();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            Debug.Log("R key pressed");
-            //ResetMesh();
-        }
-
         UpdateVertexPositions();
     }
 
     public void ResetUVWs()
     {
-        //Load ReferenceGrid
-        //m_ControlPointsGrid.LoadGrid("Assets/TargetGridData/ReferenceGrid.txt");
+        //Calculating uvw  values based on basis point positions
 
-        //Set new mesh
-        //m_meshFilter.mesh = m_newMesh;
-
-        //Reset uvw values
-        m_meshFilter = GetComponent<MeshFilter>();
-
-        Vector3[] vertices = m_meshFilter.mesh.vertices;
-
-        m_uvw = new Vector3[vertices.Length];
-
+        //Finding where u = 1, v = 1, w = 1 
         GameObject[] basisPoints = m_ControlPointsGrid.m_basisPoints;
         Vector3 min = basisPoints[0].transform.position;
         Vector3 max = basisPoints[0].transform.position;
@@ -143,12 +65,17 @@ public class Deformable : MonoBehaviour
             max.z = Mathf.Max(max.z, basisPoints[i].transform.position.z);
 
         }
-
         Vector3 delta = max - min;
 
-        for (int i = 0; i < vertices.Length; i++)
+
+        //Setting uvw array
+        m_meshFilter = GetComponent<MeshFilter>();
+        m_vertices = m_meshFilter.mesh.vertices;
+        m_uvw = new Vector3[m_vertices.Length];
+
+        for (int i = 0; i < m_vertices.Length; i++)
         {
-            Vector3 v = transform.TransformPoint(vertices[i]);
+            Vector3 v = transform.TransformPoint(m_vertices[i]);
 
             //Convert based on reference frame
             Vector3 uvw = Vector3.zero;
@@ -178,25 +105,16 @@ public class Deformable : MonoBehaviour
             {
                 uvw.z = (v.z - min.z) / delta.z;
             }
-
-
             m_uvw[i] = uvw;
         }
-
-        //Load Grid
-        //m_ControlPointsGrid.LoadGrid(m_ControlPointsGrid.m_LoadFromPath);
-         
     }
 
     void UpdateVertexPositions()
     {
         //Populating vertice array
         int arraySize = (int)(resolution * resolution);
-        SurfacePoints = new GameObject[arraySize];
         m_vertices = m_meshFilter.mesh.vertices;
 
-        Debug.Log("vertice length: " + m_vertices.Length);
-        Debug.Log("uvw length: " + m_uvw.Length);
 
         for (int i = 0; i < m_uvw.Length; i++)
         {
@@ -207,21 +125,14 @@ public class Deformable : MonoBehaviour
             GameObject[] controlPointsTopStack;
             GameObject[] controlPointsBottomStack;
 
-            GetControlPoints(m_uvw[i], out controlPointsBottomStack, out controlPointsTopStack);
-
             //Find positions over top and bottom layers of grid
+            GetControlPoints(m_uvw[i], out controlPointsBottomStack, out controlPointsTopStack);
             Vector3 topPos = GetBezierSurfacePosition(v, u, 2, 2, controlPointsTopStack);
             Vector3 bottomPos = GetBezierSurfacePosition(v, u, 2, 2, controlPointsBottomStack);
 
             //Interpolate position using w and top and bottom points
             float converted_w = w - (float)((int)w);
             Vector3 pos = Vector3.Lerp(bottomPos, topPos, converted_w);
-
-            if (i > m_vertices.Length)
-            {
-                Debug.Log("uvw count > vertices count");
-            }
-
             m_vertices[i] = transform.InverseTransformPoint(pos);
 
         }
@@ -240,8 +151,6 @@ public class Deformable : MonoBehaviour
         int v_index = (int)m_uvw[2].x;
         int w_index = (int)m_uvw[2].y;
         int u_index = (int)m_uvw[2].z;
-
-        Debug.Log($"v: {v_index}, w: {w_index}, u: {u_index}");
 
         //Finding bottom layer control points
         GameObject[] bottomLayer = new GameObject[(n + 1) * (m + 1)];
@@ -287,7 +196,6 @@ public class Deformable : MonoBehaviour
     GameObject [] GetControlPointsOfLayer(int layerIndex)
     {
         GameObject[] layerControlPoints = new GameObject[(n + 1) * (m + 1)];
-        Debug.Log("Control Points in layer: " + layerControlPoints.Length);
         for (int i = 0; i < layerControlPoints.Length; i++)
         {
             int index = i + layerIndex * (n + 1) * (m + 1);
@@ -364,7 +272,7 @@ public class Deformable : MonoBehaviour
 
         if (n < i)
         {
-            Debug.Log("WARNING: n must be greater than i");
+            Debug.LogWarning("n must be greater than i");
             return 0;
         }
 

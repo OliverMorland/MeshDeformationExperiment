@@ -57,6 +57,15 @@ public class CustomizerManager : MonoBehaviour
                 newGeoOption.GetComponent<OptionController>().m_featureToEdit = feature;
                 newGeoOption.GetComponent<OptionController>().m_meshOption = feature.m_MeshOptions[i];
             }
+
+            Debug.Log($"i: {i}, optionsCount: {feature.m_MeshOptionIcons.Count}");
+            if (i < feature.m_MeshOptionIcons.Count)
+            {
+                if (newGeoOption.GetComponentInChildren<Image>() != null)
+                {
+                    newGeoOption.GetComponentInChildren<Image>().sprite = feature.m_MeshOptionIcons[i];
+                }
+            }
         }
 
         for (int i = 0; i < feature.m_ColorOptions.Count; i++)
