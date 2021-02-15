@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class CustomizerManager : MonoBehaviour
 {
+
+    public AvatarManager m_AvatarManager;
+    //public Feature[] m_features;
+
     [Header("Panels")]
+    public GameObject m_featuresPanel;
     public GameObject m_GeometryPanel;
     public GameObject m_ColorPanel;
 
     [Header("Prefabs")]
+    public GameObject m_FeatureOptionPrefab;
     public GameObject m_GeometryOptionPrefab;
     public GameObject m_ColorOptionPrefab;
 
@@ -31,6 +37,31 @@ public class CustomizerManager : MonoBehaviour
         }
         else{
             Destroy(this.gameObject);
+        }
+
+
+        PopulateFeatures();
+    }
+
+
+    void PopulateFeatures()
+    {
+
+        Feature[] features = m_AvatarManager.GetComponentsInChildren<Feature>();
+
+        for (int i = 0; i < features.Length; i++)
+        {
+            GameObject newFeatureOption = Instantiate(m_FeatureOptionPrefab, m_featuresPanel.transform);
+
+            if (newFeatureOption.GetComponent<FeatureMenuItem>())
+            {
+                newFeatureOption.GetComponent<FeatureMenuItem>().m_Feature = features[i];
+            }
+
+            if (newFeatureOption.GetComponent<Image>())
+            {
+                newFeatureOption.GetComponent<Image>().sprite = features[i].m_FeatureIcon;
+            }
         }
     }
 
@@ -58,7 +89,6 @@ public class CustomizerManager : MonoBehaviour
                 newGeoOption.GetComponent<OptionController>().m_meshOption = feature.m_MeshOptions[i];
             }
 
-            Debug.Log($"i: {i}, optionsCount: {feature.m_MeshOptionIcons.Count}");
             if (i < feature.m_MeshOptionIcons.Count)
             {
                 if (newGeoOption.GetComponentInChildren<Image>() != null)

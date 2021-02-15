@@ -7,7 +7,7 @@ public class FeatureMenuItem : MonoBehaviour
 
     [Header("Feature")]
     [Tooltip("Drag feature from Avatar that you wish this button to affect.")]
-    [SerializeField] Feature m_Feature;
+    public Feature m_Feature;
 
 
     public void UpdateOptionsButtons()

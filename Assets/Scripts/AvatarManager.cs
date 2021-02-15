@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AvatarManager : MonoBehaviour
 {
+    public Feature[] m_Features;
     public GameObject m_HeadObj;
     public GameObject m_HairObj;
     public GameObject m_ClothingObj;

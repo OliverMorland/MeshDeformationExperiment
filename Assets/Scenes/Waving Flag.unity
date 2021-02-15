@@ -256,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &408007968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,8 +270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: -3760585382829522455, guid: 864dc07aca4d2476cbee469e6efe3c83,
-    type: 3}
 --- !u!135 &408007969
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -365,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &514655183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &514655184
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -487,7 +484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &529086263
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -595,7 +591,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &710184433
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -703,7 +698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 0}
-  m_newMesh: {fileID: 0}
 --- !u!64 &847479462
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -798,7 +792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1028564723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +806,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &1028564724
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -920,7 +913,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &1093336550
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1028,7 +1020,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &1095472157
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1228,7 +1219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &1366424827
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1452,7 +1442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPointsGrid: {fileID: 1526953822}
-  m_newMesh: {fileID: 0}
 --- !u!135 &1602405407
 SphereCollider:
   m_ObjectHideFlags: 0
