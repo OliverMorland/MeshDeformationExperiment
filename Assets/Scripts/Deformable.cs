@@ -11,6 +11,7 @@ public class Deformable : MonoBehaviour
     //Member Variables
     GameObject[] m_ControlPoints;
     MeshFilter m_meshFilter;
+    SkinnedMeshRenderer m_skinnedMeshRenderer;
     Vector3[] m_vertices;
     Vector3[] m_uvw;
     
@@ -67,10 +68,10 @@ public class Deformable : MonoBehaviour
         }
         Vector3 delta = max - min;
 
-
-        //Setting uvw array
-        m_meshFilter = GetComponent<MeshFilter>();
-        m_vertices = m_meshFilter.mesh.vertices;
+        m_skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        //m_meshFilter = GetComponent<MeshFilter>();
+        m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
+        //m_vertices = m_meshFilter.mesh.vertices;
         m_uvw = new Vector3[m_vertices.Length];
 
         for (int i = 0; i < m_vertices.Length; i++)
@@ -113,7 +114,8 @@ public class Deformable : MonoBehaviour
     {
         //Populating vertice array
         int arraySize = (int)(resolution * resolution);
-        m_vertices = m_meshFilter.mesh.vertices;
+        m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
+        //m_vertices = m_meshFilter.mesh.vertices;
 
 
         for (int i = 0; i < m_uvw.Length; i++)
@@ -138,8 +140,10 @@ public class Deformable : MonoBehaviour
         }
 
         //Add vertices to mesh
-        m_meshFilter.mesh.vertices = m_vertices;
-        m_meshFilter.mesh.RecalculateNormals();
+        m_skinnedMeshRenderer.sharedMesh.vertices = m_vertices;
+        m_skinnedMeshRenderer.sharedMesh.RecalculateNormals();
+        //m_meshFilter.mesh.vertices = m_vertices;
+        //m_meshFilter.mesh.RecalculateNormals();
         //Add mesh to mesh filter
         //m_meshFilter = GetComponent<MeshFilter>();
         //m_meshFilter.mesh = m_mesh;
