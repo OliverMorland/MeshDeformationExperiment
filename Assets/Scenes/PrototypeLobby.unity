@@ -1570,8 +1570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MeshOptions:
-  - {fileID: -1103710727403606780, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
-  - {fileID: -2232335706408701288, guid: 5e917d7b684da419f8a0aae379d89826, type: 3}
+  - {fileID: -1103710727403606780, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
+  - {fileID: -2232335706408701288, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
   m_ColorOptions:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0.97981787, b: 0, a: 1}

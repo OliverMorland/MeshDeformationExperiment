@@ -68,10 +68,18 @@ public class Deformable : MonoBehaviour
         }
         Vector3 delta = max - min;
 
-        m_skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
-        //m_meshFilter = GetComponent<MeshFilter>();
-        m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
-        //m_vertices = m_meshFilter.mesh.vertices;
+        if (GetComponent<SkinnedMeshRenderer>())
+        {
+            m_skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+            m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
+        }
+        else
+        {
+            m_meshFilter = GetComponent<MeshFilter>();
+            m_vertices = m_meshFilter.mesh.vertices;
+        }
+
+  
         m_uvw = new Vector3[m_vertices.Length];
 
         for (int i = 0; i < m_vertices.Length; i++)
@@ -114,10 +122,15 @@ public class Deformable : MonoBehaviour
     {
         //Populating vertice array
         int arraySize = (int)(resolution * resolution);
-        m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
-        //m_vertices = m_meshFilter.mesh.vertices;
-
-
+        if (GetComponent<SkinnedMeshRenderer>())
+        {
+            m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
+        }
+        else
+        {
+            m_vertices = m_meshFilter.mesh.vertices;
+        }
+       
         for (int i = 0; i < m_uvw.Length; i++)
         {
             float u = m_uvw[i].z;
@@ -140,8 +153,17 @@ public class Deformable : MonoBehaviour
         }
 
         //Add vertices to mesh
-        m_skinnedMeshRenderer.sharedMesh.vertices = m_vertices;
-        m_skinnedMeshRenderer.sharedMesh.RecalculateNormals();
+        if (GetComponent<SkinnedMeshRenderer>())
+        {
+            m_skinnedMeshRenderer.sharedMesh.vertices = m_vertices;
+            m_skinnedMeshRenderer.sharedMesh.RecalculateNormals();
+        }
+        else
+        {
+            m_meshFilter.mesh.vertices = m_vertices;
+            m_meshFilter.mesh.RecalculateNormals();
+        }
+
         //m_meshFilter.mesh.vertices = m_vertices;
         //m_meshFilter.mesh.RecalculateNormals();
         //Add mesh to mesh filter
