@@ -60,6 +60,28 @@ public class Feature : MonoBehaviour
             GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(currentGridPath);
         }
 
+        if (GetComponent<SkinnedMeshRenderer>() == null)
+        {
+            Debug.LogWarning("Object has no skinned mesh renderer");
+        }
+        else
+        {
+            Debug.Log("Updating Feature's mesh");
+
+            //Load Reference Grid
+            GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(m_referenceGridDataPath);
+
+            //Set Mesh
+            GetComponent<SkinnedMeshRenderer>().sharedMesh = mesh;
+
+            //Reset uvw values
+            GetComponent<Deformable>().ResetUVWs();
+
+            //Load relevant grid
+            string currentGridPath = GetComponent<Deformable>().m_ControlPointsGrid.m_LoadFromPath;
+            GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(currentGridPath);
+        }
+
     }
 
 
