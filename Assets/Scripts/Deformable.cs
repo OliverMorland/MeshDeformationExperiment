@@ -71,6 +71,7 @@ public class Deformable : MonoBehaviour
         if (GetComponent<SkinnedMeshRenderer>())
         {
             m_skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+            m_skinnedMeshRenderer.sharedMesh = (Mesh)Instantiate(m_skinnedMeshRenderer.sharedMesh);
             m_vertices = m_skinnedMeshRenderer.sharedMesh.vertices;
         }
         else

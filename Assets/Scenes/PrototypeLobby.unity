@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3eb2381e4754b45807c722c7e88449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AvatarManager: {fileID: 2608197281100576906}
+  m_AvatarManager: {fileID: 1231847054}
   m_featuresPanel: {fileID: 1252455964}
   m_GeometryPanel: {fileID: 2141835712}
   m_ColorPanel: {fileID: 347200143}
@@ -1108,7 +1108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1231847053
 Transform:
   m_ObjectHideFlags: 0
@@ -1671,7 +1671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2608197281100576904
 MonoBehaviour:
   m_ObjectHideFlags: 0
