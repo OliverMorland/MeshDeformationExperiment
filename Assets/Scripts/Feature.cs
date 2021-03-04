@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Feature : MonoBehaviour
 {
@@ -16,28 +17,38 @@ public class Feature : MonoBehaviour
 
     static string m_referenceGridDataPath = "Assets/TargetGridData/ReferenceGrid.txt";
 
+
+    private void Awake()
+    {
+        //UpdateFeature(m_MeshOptions[0]);
+    }
+
     public void UpdateFeature(Mesh mesh)
     {
         switch (mesh.name)
         {
             case "Head_Standard":
                 UpdateDeformationGrid("Assets/TargetGridData/ReferenceGrid.txt");
+                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroMan.txt");
                 break;
             case "FemaleHead_Standard":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToEuroFemale.txt");
+                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             case "AsianMale_BaseHead":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToAsiaMale.txt");
+                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             case "AsianFemale_BaseHead":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToAsiaFemale.txt");
+                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             default:
                 //UpdateDeformationGrid("Assets/TargetGridData/ReferenceGrid.txt");
                 break;
         }
 
-
+        /*
         if (GetComponent<MeshFilter>() == null)
         {
             Debug.LogWarning("Object has no mesh filter");
@@ -59,10 +70,11 @@ public class Feature : MonoBehaviour
             string currentGridPath = GetComponent<Deformable>().m_ControlPointsGrid.m_LoadFromPath;
             GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(currentGridPath);
         }
-
+        */
+        
         if (GetComponent<SkinnedMeshRenderer>() == null)
         {
-            Debug.LogWarning("Object has no skinned mesh renderer");
+            Debug.LogError("Object has no skinned mesh renderer");
         }
         else
         {
@@ -80,6 +92,7 @@ public class Feature : MonoBehaviour
             //Load relevant grid
             string currentGridPath = GetComponent<Deformable>().m_ControlPointsGrid.m_LoadFromPath;
             GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(currentGridPath);
+         
         }
 
     }
@@ -104,12 +117,58 @@ public class Feature : MonoBehaviour
     {
         if (GetComponent<Deformable>() == null)
         {
-            Debug.Log("No Deformable script attatched");
+            Debug.LogWarning("No Deformable script attatched");
             return;
         }
 
         GetComponent<Deformable>().m_ControlPointsGrid.m_LoadFromPath = gridDataPath;
         GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(gridDataPath);
 
+    }
+
+    void UpdateBones(string bonesDataPath)
+    {
+        Debug.Log("Updating bones");
+        if (GetComponent<SkinnedMeshRenderer>() == null)
+        {
+            Debug.LogError("No skin mesh renderer attatched");
+            return;
+        }
+
+        Transform headBone;
+        Transform neckBone;
+        Transform chestBone;
+
+        //Get Bones
+        Transform rootBone = GetComponent<SkinnedMeshRenderer>().rootBone;
+        if (rootBone != null)
+        {
+            headBone = rootBone;
+            if (headBone.childCount > 0)
+            {
+                neckBone = headBone.GetChild(0);
+                if (neckBone.childCount > 0)
+                {
+                    chestBone = neckBone.GetChild(0);
+
+                    //Get Data
+                    if (File.Exists(bonesDataPath))
+                    {
+                        string jsonString = File.ReadAllText(bonesDataPath);
+                        BoneData boneData = JsonUtility.FromJson<BoneData>(jsonString);
+                        Debug.Log("Head bone position: " + boneData.headBonePos);
+
+                        headBone.localPosition = boneData.headBonePos;
+                        neckBone.localPosition = boneData.neckBonePos;
+                        chestBone.localPosition = boneData.chestBonePos;
+                    }
+                    else
+                    {
+                        Debug.Log("File doesn't exist");
+                    }
+
+                }
+            }
+        }
     }
 }
