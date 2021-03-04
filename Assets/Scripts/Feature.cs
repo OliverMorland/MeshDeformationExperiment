@@ -8,12 +8,14 @@ public class Feature : MonoBehaviour
 
     [Header("Options")]
     public List<Mesh> m_MeshOptions;
-    public List<Color> m_ColorOptions;
+    public List<Material> m_MaterialOptions;
+    public List<Vector3> m_HLSOptions;
 
     [Header("Icons")]
     [Space(20)]
     public Sprite m_FeatureIcon;
     public List<Sprite> m_MeshOptionIcons;
+
 
     static string m_referenceGridDataPath = "Assets/TargetGridData/ReferenceGrid.txt";
 
@@ -29,22 +31,18 @@ public class Feature : MonoBehaviour
         {
             case "Head_Standard":
                 UpdateDeformationGrid("Assets/TargetGridData/ReferenceGrid.txt");
-                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroMan.txt");
                 break;
             case "FemaleHead_Standard":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToEuroFemale.txt");
-                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             case "AsianMale_BaseHead":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToAsiaMale.txt");
-                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             case "AsianFemale_BaseHead":
                 UpdateDeformationGrid("Assets/TargetGridData/EuroMaleToAsiaFemale.txt");
-                //UpdateBones("Assets/Resources/BonesData/BoneDataEuroFemale.txt");
                 break;
             default:
-                //UpdateDeformationGrid("Assets/TargetGridData/ReferenceGrid.txt");
+                //Do nothing
                 break;
         }
 
@@ -78,8 +76,6 @@ public class Feature : MonoBehaviour
         }
         else
         {
-            Debug.Log("Updating Feature's mesh");
-
             //Load Reference Grid
             GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(m_referenceGridDataPath);
 
@@ -92,22 +88,40 @@ public class Feature : MonoBehaviour
             //Load relevant grid
             string currentGridPath = GetComponent<Deformable>().m_ControlPointsGrid.m_LoadFromPath;
             GetComponent<Deformable>().m_ControlPointsGrid.LoadGrid(currentGridPath);
-         
+     
         }
 
     }
 
-
-    public void UpdateFeature(Color color)
+    public void UpdateMaterial(Material selectedMaterial)
     {
         if (GetComponent<Renderer>() == null)
         {
-            Debug.LogWarning("Object has no renderer");
+            Debug.LogError("Object has no renderer");
         }
         else
         {
-            Debug.Log("Updating Feature's Color");
-            GetComponent<Renderer>().material.color = color;
+            GetComponent<Renderer>().material = selectedMaterial;
+        }
+    }
+
+
+    public void UpdateFeature(Vector3 hls)
+    {
+        if (GetComponent<Renderer>() == null)
+        {
+            Debug.LogError("Object has no renderer");
+        }
+        else
+        {
+            string hue = "_Hue";
+            string lightness = "_Lightness";
+            Material featureMaterial = GetComponent<Renderer>().material; 
+            if ((featureMaterial.GetFloat(hue) != null) || (featureMaterial.GetFloat(lightness) != null))
+            {
+                GetComponent<Renderer>().material.SetFloat(hue, hls.x);
+                GetComponent<Renderer>().material.SetFloat(lightness, hls.y);
+            }
         }
 
     }

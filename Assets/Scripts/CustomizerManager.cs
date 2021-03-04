@@ -7,7 +7,6 @@ public class CustomizerManager : MonoBehaviour
 {
 
     public AvatarManager m_AvatarManager;
-    //public Feature[] m_features;
 
     [Header("Panels")]
     public GameObject m_featuresPanel;
@@ -65,6 +64,7 @@ public class CustomizerManager : MonoBehaviour
         }
     }
 
+
     public void PopulateOptions(Feature feature)
     {
 
@@ -87,6 +87,11 @@ public class CustomizerManager : MonoBehaviour
             {
                 newGeoOption.GetComponent<OptionController>().m_featureToEdit = feature;
                 newGeoOption.GetComponent<OptionController>().m_meshOption = feature.m_MeshOptions[i];
+
+                if (i < feature.m_MaterialOptions.Count)
+                {
+                    newGeoOption.GetComponent<OptionController>().m_MaterialOption = feature.m_MaterialOptions[i];
+                }
             }
 
             if (i < feature.m_MeshOptionIcons.Count)
@@ -98,7 +103,7 @@ public class CustomizerManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < feature.m_ColorOptions.Count; i++)
+        for (int i = 0; i < feature.m_HLSOptions.Count; i++)
         {
             GameObject newColOption = Instantiate(m_ColorOptionPrefab, m_ColorPanel.transform);
 
@@ -108,13 +113,18 @@ public class CustomizerManager : MonoBehaviour
             }
             else
             {
-                newColOption.GetComponent<Image>().color = feature.m_ColorOptions[i];
+                float H = feature.m_HLSOptions[i].x;
+                float L = feature.m_HLSOptions[i].y;
+                float S = feature.m_HLSOptions[i].z;
+
+
+                newColOption.GetComponent<Image>().color = ColorConvertor.HLStoRGB(H, L + 0.5f, S);
             }
 
             if (newColOption.GetComponent<OptionController>() != null)
             {
                 newColOption.GetComponent<OptionController>().m_featureToEdit = feature;
-                newColOption.GetComponent<OptionController>().m_colorOption = feature.m_ColorOptions[i];
+                newColOption.GetComponent<OptionController>().m_hlsOption = feature.m_HLSOptions[i];
             }
         }
     }

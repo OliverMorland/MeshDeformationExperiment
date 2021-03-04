@@ -162,5 +162,5 @@ Shader "GGAvatar Shaders/ClothesShader" {
         }
     }
     FallBack "Diffuse"
-    CustomEditor "ShaderForgeMaterialInspector"
+    //CustomEditor "ShaderForgeMaterialInspector"
 }

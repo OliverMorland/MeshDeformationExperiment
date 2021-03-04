@@ -396,10 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MeshOptions:
   - {fileID: -8032224494671191629, guid: 5e917d7b684da419f8a0aae379d89826, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.14216995, b: 1, a: 1}
-  - {r: 0.8113208, g: 0.60610676, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: f7b3775f63d0f4f5bb2bb6e6a5400177, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: f7b3775f63d0f4f5bb2bb6e6a5400177, type: 3}
@@ -620,11 +618,8 @@ MonoBehaviour:
   - {fileID: 3960941303444557738, guid: 6fdfb31590153442d8414c9dcd25923a, type: 3}
   - {fileID: -4929550203656093727, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
   - {fileID: 8180711184686921198, guid: 4c915c8e9f65f46c08556e56a4feac96, type: 3}
-  m_ColorOptions:
-  - {r: 0.8962264, g: 0.75671947, b: 0.7649258, a: 1}
-  - {r: 0.8867924, g: 0.77119386, b: 0.6483624, a: 1}
-  - {r: 0.6981132, g: 0.5378389, b: 0.40503737, a: 1}
-  - {r: 0.24528301, g: 0.1405691, b: 0.019668924, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 48654550d497f46a4ba1d31ecd1402ac, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 6b0ea9188cc274beba91f0fbbefc55e2, type: 3}
@@ -754,12 +749,8 @@ MonoBehaviour:
   m_MeshOptions:
   - {fileID: -1103710727403606780, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
   - {fileID: -2232335706408701288, guid: 5e917d7b684da419f8a0aae379d89826, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.97981787, b: 0, a: 1}
-  - {r: 0, g: 0.43080854, b: 1, a: 1}
-  - {r: 0, g: 0.5943396, b: 0.07933958, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 613d9a9cf3438486cb8a41ccbe2c8b5a, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 89f77b7f442f0463f9f135f4fe956c05, type: 3}
@@ -880,12 +871,8 @@ MonoBehaviour:
   m_MeshOptions:
   - {fileID: -1103710727403606780, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
   - {fileID: -2232335706408701288, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.97981787, b: 0, a: 1}
-  - {r: 0, g: 0.43080854, b: 1, a: 1}
-  - {r: 0, g: 0.5943396, b: 0.07933958, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 613d9a9cf3438486cb8a41ccbe2c8b5a, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 89f77b7f442f0463f9f135f4fe956c05, type: 3}
@@ -1093,11 +1080,8 @@ MonoBehaviour:
   - {fileID: 3564427849321805674, guid: 864dc07aca4d2476cbee469e6efe3c83, type: 3}
   - {fileID: 7713707774505681637, guid: 864dc07aca4d2476cbee469e6efe3c83, type: 3}
   - {fileID: 1007614363569886252, guid: 864dc07aca4d2476cbee469e6efe3c83, type: 3}
-  m_ColorOptions:
-  - {r: 0.8490566, g: 0.7703503, b: 0.3964934, a: 1}
-  - {r: 0.9056604, g: 0.65569246, b: 0.36311856, a: 1}
-  - {r: 0.41509432, g: 0.27945128, b: 0.05286579, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: d8b09c9fc2d6e492e8c3b8e1e3b35ab2, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: c152beeb6a2a84a519414a6bf482c3aa, type: 3}
@@ -1398,11 +1382,8 @@ MonoBehaviour:
   - {fileID: 3960941303444557738, guid: 6fdfb31590153442d8414c9dcd25923a, type: 3}
   - {fileID: -4929550203656093727, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
   - {fileID: 8180711184686921198, guid: 4c915c8e9f65f46c08556e56a4feac96, type: 3}
-  m_ColorOptions:
-  - {r: 0.8962264, g: 0.75671947, b: 0.7649258, a: 1}
-  - {r: 0.8867924, g: 0.77119386, b: 0.6483624, a: 1}
-  - {r: 0.6981132, g: 0.5378389, b: 0.40503737, a: 1}
-  - {r: 0.24528301, g: 0.1405691, b: 0.019668924, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 48654550d497f46a4ba1d31ecd1402ac, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 6b0ea9188cc274beba91f0fbbefc55e2, type: 3}
@@ -1837,12 +1818,8 @@ MonoBehaviour:
   m_MeshOptions:
   - {fileID: -1103710727403606780, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
   - {fileID: -2232335706408701288, guid: c120595ae39c7450ea051404c7a524ec, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.97981787, b: 0, a: 1}
-  - {r: 0, g: 0.43080854, b: 1, a: 1}
-  - {r: 0, g: 0.5943396, b: 0.07933958, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 613d9a9cf3438486cb8a41ccbe2c8b5a, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 89f77b7f442f0463f9f135f4fe956c05, type: 3}
@@ -1911,11 +1888,15 @@ MonoBehaviour:
   - {fileID: 3960941303444557738, guid: 6fdfb31590153442d8414c9dcd25923a, type: 3}
   - {fileID: -4929550203656093727, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
   - {fileID: 8180711184686921198, guid: 4c915c8e9f65f46c08556e56a4feac96, type: 3}
-  m_ColorOptions:
-  - {r: 0.8962264, g: 0.75671947, b: 0.7649258, a: 1}
-  - {r: 0.8867924, g: 0.77119386, b: 0.6483624, a: 1}
-  - {r: 0.6981132, g: 0.5378389, b: 0.40503737, a: 1}
-  - {r: 0.24528301, g: 0.1405691, b: 0.019668924, a: 1}
+  m_MaterialOptions:
+  - {fileID: 2100000, guid: 059fbfd3401fc42da811cf055fb7f1b2, type: 2}
+  - {fileID: 2100000, guid: 9469d12f6939746ee90e893fcb1a023a, type: 2}
+  - {fileID: 2100000, guid: d3ac45e43b4724eaa8ca39050ba0168a, type: 2}
+  - {fileID: 2100000, guid: 8e6a42cfb8d4748bc87a15799abbb623, type: 2}
+  m_HLSOptions:
+  - {x: 0, y: -0.4, z: 0}
+  - {x: 0, y: -0.1, z: 0}
+  - {x: 0, y: 0.05, z: 0}
   m_FeatureIcon: {fileID: 21300000, guid: 48654550d497f46a4ba1d31ecd1402ac, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 6b0ea9188cc274beba91f0fbbefc55e2, type: 3}
@@ -2258,12 +2239,12 @@ MonoBehaviour:
   m_MeshOptions:
   - {fileID: -1103710727403606780, guid: 7e805183e53c146b2b653fedd89bb1e7, type: 3}
   - {fileID: -2232335706408701288, guid: 7e805183e53c146b2b653fedd89bb1e7, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.97981787, b: 0, a: 1}
-  - {r: 0, g: 0.43080854, b: 1, a: 1}
-  - {r: 0, g: 0.5943396, b: 0.07933958, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
+  m_MaterialOptions:
+  - {fileID: 2100000, guid: ec6e01df500914732ab55ad58190b302, type: 2}
+  - {fileID: 2100000, guid: efe20600d24584074a4891f578ae02e4, type: 2}
+  m_HLSOptions:
+  - {x: 0, y: 0, z: 0.9}
+  - {x: 0.33, y: 0, z: 0.9}
   m_FeatureIcon: {fileID: 21300000, guid: 613d9a9cf3438486cb8a41ccbe2c8b5a, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 89f77b7f442f0463f9f135f4fe956c05, type: 3}
@@ -2349,11 +2330,8 @@ MonoBehaviour:
   - {fileID: 3960941303444557738, guid: 6fdfb31590153442d8414c9dcd25923a, type: 3}
   - {fileID: -4929550203656093727, guid: 8ad2e8dece02f4ba7bb0f0e72f790af5, type: 3}
   - {fileID: 8180711184686921198, guid: 4c915c8e9f65f46c08556e56a4feac96, type: 3}
-  m_ColorOptions:
-  - {r: 0.8962264, g: 0.75671947, b: 0.7649258, a: 1}
-  - {r: 0.8867924, g: 0.77119386, b: 0.6483624, a: 1}
-  - {r: 0.6981132, g: 0.5378389, b: 0.40503737, a: 1}
-  - {r: 0.24528301, g: 0.1405691, b: 0.019668924, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: 48654550d497f46a4ba1d31ecd1402ac, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: 6b0ea9188cc274beba91f0fbbefc55e2, type: 3}
@@ -2419,8 +2397,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 239378781582670930, guid: 7e805183e53c146b2b653fedd89bb1e7, type: 3}
-  - {fileID: -8499701361930146817, guid: 7e805183e53c146b2b653fedd89bb1e7, type: 3}
+  - {fileID: 2100000, guid: 059fbfd3401fc42da811cf055fb7f1b2, type: 2}
+  - {fileID: 2100000, guid: 059fbfd3401fc42da811cf055fb7f1b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2450,7 +2428,15 @@ SkinnedMeshRenderer:
   - {fileID: 4551897600478026374}
   - {fileID: 3984377412834259617}
   - {fileID: 7529076214032066747}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   m_RootBone: {fileID: 4551897600478026374}
   m_AABB:
     m_Center: {x: -0.27084288, y: -0.0006287843, z: 0.0335633}
@@ -2659,10 +2645,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MeshOptions:
   - {fileID: -8032224494671191629, guid: 5e917d7b684da419f8a0aae379d89826, type: 3}
-  m_ColorOptions:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.14216995, b: 1, a: 1}
-  - {r: 0.8113208, g: 0.60610676, b: 0, a: 1}
+  m_MaterialOptions: []
+  m_HLSOptions: []
   m_FeatureIcon: {fileID: 21300000, guid: f7b3775f63d0f4f5bb2bb6e6a5400177, type: 3}
   m_MeshOptionIcons:
   - {fileID: 21300000, guid: f7b3775f63d0f4f5bb2bb6e6a5400177, type: 3}

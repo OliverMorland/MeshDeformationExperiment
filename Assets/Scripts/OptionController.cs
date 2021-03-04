@@ -9,7 +9,10 @@ public class OptionController : MonoBehaviour
     [HideInInspector]
     public Mesh m_meshOption;
     [HideInInspector]
-    public Color m_colorOption;
+    public Material m_MaterialOption;
+    [HideInInspector]
+    public Vector3 m_hlsOption;
+
 
     public void UpdateFeatureMesh()
     {
@@ -20,19 +23,23 @@ public class OptionController : MonoBehaviour
         else
         {
             m_featureToEdit.UpdateFeature(m_meshOption);
+
+            if (m_MaterialOption != null)
+            {
+                m_featureToEdit.UpdateMaterial(m_MaterialOption);
+            }
         }
     }
 
-
     public void UpdateFeatureColor()
     {
-        if (m_colorOption == null)
+        if (m_hlsOption == null)
         {
             Debug.Log("Option has no assigned color");
         }
         else
         {
-            m_featureToEdit.UpdateFeature(m_colorOption);
+            m_featureToEdit.UpdateFeature(m_hlsOption);
         }
     }
 }
