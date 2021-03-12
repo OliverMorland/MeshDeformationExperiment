@@ -42,7 +42,7 @@ public class ControlPointGrid : MonoBehaviour
 
         }
 
-        //Load Grid Points
+        //Load Grid Point
         if (File.Exists(m_LoadFromPath))
         {
             LoadGrid(m_LoadFromPath);

@@ -175,6 +175,7 @@ public class Deformable : MonoBehaviour
         //m_meshFilter.mesh = m_mesh;
     }
 
+    /*
     void GetStackPoints()
     {
         //Threshold uvw values, e,g v = 1.2 so v_index = 1
@@ -221,7 +222,7 @@ public class Deformable : MonoBehaviour
 
 
     }
-
+    
 
     GameObject [] GetControlPointsOfLayer(int layerIndex)
     {
@@ -234,7 +235,7 @@ public class Deformable : MonoBehaviour
 
         return layerControlPoints;
     }
-
+    */
 
     void GetControlPoints(Vector3 uvw, out GameObject[] bottomStack, out GameObject [] topStack)
     {
